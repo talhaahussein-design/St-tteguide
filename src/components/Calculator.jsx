@@ -11,20 +11,20 @@ const Calculator = ({ type, onBack }) => {
     if (saved) return JSON.parse(saved);
     
     return isExpenses ? {
-      medicin: 0,
-      transport: 0,
-      mad: 0,
-      vask: 0,
-      udstyr: 0,
-      andre: 0,
-      maaneder: 12,
-      engangs: 0
+      medicin: '',
+      transport: '',
+      mad: '',
+      vask: '',
+      udstyr: '',
+      andre: '',
+      maaneder: '12',
+      engangs: ''
     } : {
-      loen: 0,
-      normaleTimer: 37,
-      reduceredeTimer: 0,
-      tillaeg: 0,
-      maaneder: 12
+      loen: '',
+      normaleTimer: '37',
+      reduceredeTimer: '',
+      tillaeg: '',
+      maaneder: '12'
     };
   };
 
@@ -36,18 +36,24 @@ const Calculator = ({ type, onBack }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Tillad kun tal og decimaltegn (skift til string-baseret for at undgå keyboard-luk bug)
+    const sanitizedValue = value.replace(/[^0-9.,]/g, '').replace(',', '.');
     setData(prev => ({
       ...prev,
-      [name]: parseFloat(value) || 0
+      [name]: sanitizedValue
     }));
   };
+
+  const parseValue = (val) => parseFloat(val) || 0;
 
   // Calculations
   let results = {};
   if (isExpenses) {
-    const monthlySum = data.medicin + data.transport + data.mad + data.vask + data.udstyr + data.andre;
-    const yearlyTotal = (monthlySum * data.maaneder) + data.engangs;
-    const monthlyAvg = data.maaneder > 0 ? yearlyTotal / data.maaneder : 0;
+    const monthlySum = parseValue(data.medicin) + parseValue(data.transport) + parseValue(data.mad) + 
+                       parseValue(data.vask) + parseValue(data.udstyr) + parseValue(data.andre);
+    const maaneder = parseValue(data.maaneder);
+    const yearlyTotal = (monthlySum * maaneder) + parseValue(data.engangs);
+    const monthlyAvg = maaneder > 0 ? yearlyTotal / maaneder : 0;
     const isAboveThreshold = yearlyTotal >= config.minimumThreshold;
 
     results = {
@@ -64,10 +70,16 @@ const Calculator = ({ type, onBack }) => {
       disclaimer: "Dette er kun et vejledende overblik – kommunen træffer den endelige vurdering."
     };
   } else {
+    const loen = parseValue(data.loen);
+    const normaleTimer = parseValue(data.normaleTimer);
+    const reduceredeTimer = parseValue(data.reduceredeTimer);
+    const tillaeg = parseValue(data.tillaeg);
+    const maaneder = parseValue(data.maaneder);
+
     // Timeløn = månedsløn / (normale_timer × 4,33)
-    const hourlyRate = data.normaleTimer > 0 ? data.loen / (data.normaleTimer * 4.33) : 0;
-    const monthlyLoss = (data.reduceredeTimer * 4.33 * hourlyRate) + data.tillaeg;
-    const yearlyLoss = monthlyLoss * data.maaneder;
+    const hourlyRate = normaleTimer > 0 ? loen / (normaleTimer * 4.33) : 0;
+    const monthlyLoss = (reduceredeTimer * 4.33 * hourlyRate) + tillaeg;
+    const yearlyLoss = monthlyLoss * maaneder;
     const isLikelyEligible = monthlyLoss > 5000;
 
     results = {
@@ -90,9 +102,10 @@ const Calculator = ({ type, onBack }) => {
       <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
       <div className="relative">
         <input
-          type="number"
+          type="text"
+          inputMode="decimal"
           name={name}
-          value={value === 0 ? '' : value}
+          value={value}
           onChange={handleChange}
           placeholder="0"
           className="block w-full rounded-lg border-slate-200 border p-3 pr-12 focus:border-teal-500 focus:ring-teal-500"
