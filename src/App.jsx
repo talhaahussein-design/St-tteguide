@@ -8,6 +8,7 @@ import { Checklist } from './components/Checklist'
 import { Tools } from './components/Tools'
 import { Rejection } from './components/Rejection'
 import Calculator from './components/Calculator'
+import { KidsUniverse } from './components/KidsUniverse'
 
 function App() {
   const [activeSection, setActiveSection] = useState(() => {
@@ -15,6 +16,9 @@ function App() {
   })
   const [role, setRole] = useState(() => {
     return localStorage.getItem('userRole') || null
+  })
+  const [userFlow, setUserFlow] = useState(() => {
+    return localStorage.getItem('userFlow') || null
   })
   const [screeningAnswers, setScreeningAnswers] = useState(() => {
     const saved = localStorage.getItem('screeningAnswers')
@@ -26,12 +30,22 @@ function App() {
   useEffect(() => {
     localStorage.setItem('lastSection', activeSection)
     if (role) localStorage.setItem('userRole', role)
+    if (userFlow) localStorage.setItem('userFlow', userFlow)
     localStorage.setItem('screeningAnswers', JSON.stringify(screeningAnswers))
-  }, [activeSection, role, screeningAnswers])
+  }, [activeSection, role, userFlow, screeningAnswers])
 
   const handleSelectRole = (roleId) => {
+    const selectedRole = content.welcome.roles.find(r => r.id === roleId)
     setRole(roleId)
-    setActiveSection('screening')
+    setUserFlow(selectedRole.flow)
+    
+    if (selectedRole.flow === 'parent') {
+      setActiveSection('screening')
+    } else if (selectedRole.flow === 'kids') {
+      setActiveSection('kids-universe')
+    } else if (selectedRole.flow === 'professional') {
+      setActiveSection('professional')
+    }
   }
 
   const handleScreeningComplete = (answers) => {
@@ -126,6 +140,27 @@ function App() {
         {activeSection === 'rejection' && (
           <Rejection content={content.rejection} />
         )}
+
+        {activeSection === 'kids-universe' && (
+          <KidsUniverse 
+            content={content.kidsUniverse} 
+            onBack={() => setActiveSection('welcome')}
+          />
+        )}
+
+        {activeSection === 'professional' && (
+          <div className="text-center py-20 animate-in fade-in duration-500">
+            <span className="text-6xl mb-6 block">🏫</span>
+            <h2 className="text-2xl font-bold text-teal-800">Pædagog-sektion</h2>
+            <p className="text-slate-500 mt-2">Kommer snart...</p>
+            <button 
+              onClick={() => setActiveSection('welcome')}
+              className="mt-8 text-teal-600 font-bold"
+            >
+              ← Tilbage
+            </button>
+          </div>
+        )}
       </main>
 
       <nav className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-slate-200 p-2 shadow-2xl z-20">
@@ -139,11 +174,19 @@ function App() {
           ].map((item) => (
             <button 
               key={item.id}
-              onClick={() => setActiveSection(item.id)}
-              className={`flex flex-col items-center p-2 rounded-xl transition-all ${activeSection === item.id || (activeSection === 'detail' && item.id === 'services') || (activeSection === 'calculator' && item.id === 'services') ? 'text-teal-600 bg-teal-50/50' : 'text-slate-400'}`}
+              onClick={() => {
+                if (item.id === 'services' && userFlow === 'kids') {
+                  setActiveSection('kids-universe')
+                } else if (item.id === 'services' && userFlow === 'professional') {
+                  setActiveSection('professional')
+                } else {
+                  setActiveSection(item.id)
+                }
+              }}
+              className={`flex flex-col items-center p-2 rounded-xl transition-all ${activeSection === item.id || (item.id === 'services' && ['services', 'detail', 'calculator', 'kids-universe', 'professional'].includes(activeSection) && activeSection !== 'welcome') ? 'text-teal-600 bg-teal-50/50' : 'text-slate-400'}`}
             >
               <span className="text-xl mb-1">{item.icon}</span>
-              <span className="text-[10px] font-bold uppercase tracking-wider">{item.label}</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider">{item.id === 'services' && userFlow === 'kids' ? 'Univers' : item.label}</span>
             </button>
           ))}
         </div>

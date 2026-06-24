@@ -8,11 +8,59 @@ export const content = {
     description: "At navigere i det kommunale system, når man har et barn med særlige behov, kan føles som en uoverskuelig labyrint. StøtteGuide é skabt til at hjælpe dig med at finde vej.\n\nHer kan du få et hurtigt overblik over de ydelser, der er mest relevante for din familie, og få hjælp til at tage det næste skridt i ansøgningsprocessen.",
     rolesTitle: "Hvem er du?",
     roles: [
-      { id: "autism_adhd", title: "Jeg er forælder til et barn med autisme/ADHD", description: "Vælg denne, hvis dit barn har en diagnose eller er under udredning for neuropsykiske udfordringer." },
-      { id: "other_needs", title: "Jeg er forælder til et barn med andre behov", description: "Vælg denne, hvis dit barn har andre fysiske eller psykiske funktionsnedsættelser." },
-      { id: "relative_pro", title: "Jeg er pårørende eller professionel", description: "Vælg denne, hvis du søger information på vegne af en anden." }
+      { 
+        id: "foraeldre", 
+        title: "👤 Forældre", 
+        description: "Guide til kommunale ydelser, skabeloner og beregnere",
+        flow: "parent"
+      },
+      { 
+        id: "boern-unge", 
+        title: "🧒 Barn / Unge", 
+        description: "Korte videoer, tips og tjeklister til dig",
+        flow: "kids"
+      },
+      { 
+        id: "paedagog", 
+        title: "🏫 Pædagog / Fagperson", 
+        description: "Værktøjer og guides til dit arbejde",
+        flow: "professional"
+      }
     ],
     footer: "StøtteGuide er en uafhængig vejviser. Vi gemmer ikke dine personlige data, og vores mål er udelukkende at gøre lovgivningen forståelig og tilgængelig for dig."
+  },
+  kidsUniverse: {
+    title: "Børneunivers",
+    description: "Korte videoer og gode råd til dig",
+    categories: [
+      {
+        id: "learning",
+        title: "🧠 Læringskort",
+        description: "Om følelser, pauser, ro og hvordan du har det",
+        items: [
+          { title: "Vand og dig", emoji: "💧", text: "Husk at drikke vand hver dag. Det giver dig mere energi.", tip: "Sæt en alarm på din telefon" },
+          { title: "Mavefornemmelser", emoji: "🫣", text: "Din mave kan mærke, når du er glad, bange eller spændt.", tip: "Prøv at trække vejret dybt 3 gange" },
+          { title: "Følelser", emoji: "😊", text: "Alle følelser er okay. Det handler om, hvad du gør med dem.", tip: "Tegn hvordan du har det" },
+          { title: "Pauser", emoji: "☕", text: "Tag små pauser i løbet af dagen. Få ro og kom tilbage.", tip: "Sæt 5 minutters pause på" },
+          { title: "Ro", emoji: "🧘", text: "Find et roligt sted, når det hele bliver for meget.", tip: "Lyt til rolig musik" },
+          { title: "Sikkerhed", emoji: "🛡️", text: "Spørg altid en voksen, hvis du er i tvivl.", tip: "Sig til hvis noget føles forkert" }
+        ]
+      },
+      {
+        id: "travel",
+        title: "🚗 Klar til tur",
+        description: "Tjeklister og gode råd til rejser og udflugter",
+        items: [
+          { title: "Poolvand", emoji: "🏊", text: "Tjek om der er klor i vandet. Nogle reagerer på det.", tip: "Tag badebriller med" },
+          { title: "Mad på tur", emoji: "🍱", text: "Husk mad du kan lide. Nye steder kan have anderledes mad.", tip: "Tag snacks med hjemmefra" },
+          { title: "Toilet", emoji: "🚽", text: "Find ud af hvor toiletterne er, når I ankommer.", tip: "Tag vådservietter med" },
+          { title: "Varme", emoji: "☀️", text: "Husk solcreme, hat og nok vand når det er varmt.", tip: "Sæt dig i skyggen en gang imellem" },
+          { title: "Væske", emoji: "💧", text: "Drik vand jævnligt. Især når I er aktive.", tip: "Tag en drikkedunk med" },
+          { title: "Ventetid", emoji: "⏳", text: "Nogle gange skal man vente. Det kan være kedeligt.", tip: "Hav en lille leg eller bog med" },
+          { title: "Svimmelhed", emoji: "😵", text: "Hvis du bliver svimmel, så sæt dig ned og få noget at drikke.", tip: "Sig til en voksen med det samme" }
+        ]
+      }
+    ]
   },
   screening: {
     title: "Find de rette ydelser",
@@ -42,7 +90,7 @@ export const content = {
       { 
         id: "contact", 
         question: "Er I allerede i kontakt med en sagsbehandler i kommunen?", 
-        options: ["Ja, vi har en fast sagsbehandler i børne-familieafdelingen.", "Ja, men vi hører sjældent fra dem.", "Nej, vi har ikke kontakt til kommunen endnu."] 
+        options: ["Ja, we har en fast sagsbehandler i børne-familieafdelingen.", "Ja, men vi hører sjældent fra dem.", "Nej, vi har ikke kontakt til kommunen endnu."] 
       },
       { 
         id: "impact", 
