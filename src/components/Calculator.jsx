@@ -1,6 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { config } from '../data/content';
 
+const InputField = ({ label, name, value, onChange, suffix = "kr" }) => (
+  <div className="mb-4">
+    <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
+    <div className="relative">
+      <input
+        type="text"
+        inputMode="decimal"
+        name={name}
+        value={value || ''}
+        onChange={onChange}
+        placeholder="0"
+        className="block w-full rounded-lg border-slate-200 border p-3 pr-12 focus:border-teal-500 focus:ring-teal-500"
+      />
+      <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
+        {suffix}
+      </div>
+    </div>
+  </div>
+);
+
 const Calculator = ({ type, onBack }) => {
   const isExpenses = type === 'expenses';
   const storageKey = `calculator_${type}`;
@@ -36,23 +56,27 @@ const Calculator = ({ type, onBack }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Tillad kun tal og decimaltegn (skift til string-baseret for at undgå keyboard-luk bug)
-    const sanitizedValue = value.replace(/[^0-9.,]/g, '').replace(',', '.');
-    setData(prev => ({
-      ...prev,
-      [name]: sanitizedValue
-    }));
+    // Tillad kun tal, komma og punktum
+    if (value === '' || /^[\d.,]+$/.test(value)) {
+      setData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
-  const parseValue = (val) => parseFloat(val) || 0;
+  const parseVal = (val) => {
+    if (!val) return 0;
+    return parseFloat(String(val).replace(',', '.')) || 0;
+  };
 
   // Calculations
   let results = {};
   if (isExpenses) {
-    const monthlySum = parseValue(data.medicin) + parseValue(data.transport) + parseValue(data.mad) + 
-                       parseValue(data.vask) + parseValue(data.udstyr) + parseValue(data.andre);
-    const maaneder = parseValue(data.maaneder);
-    const yearlyTotal = (monthlySum * maaneder) + parseValue(data.engangs);
+    const monthlySum = parseVal(data.medicin) + parseVal(data.transport) + parseVal(data.mad) + 
+                       parseVal(data.vask) + parseVal(data.udstyr) + parseVal(data.andre);
+    const maaneder = parseVal(data.maaneder);
+    const yearlyTotal = (monthlySum * maaneder) + parseVal(data.engangs);
     const monthlyAvg = maaneder > 0 ? yearlyTotal / maaneder : 0;
     const isAboveThreshold = yearlyTotal >= config.minimumThreshold;
 
@@ -70,11 +94,11 @@ const Calculator = ({ type, onBack }) => {
       disclaimer: "Dette er kun et vejledende overblik – kommunen træffer den endelige vurdering."
     };
   } else {
-    const loen = parseValue(data.loen);
-    const normaleTimer = parseValue(data.normaleTimer);
-    const reduceredeTimer = parseValue(data.reduceredeTimer);
-    const tillaeg = parseValue(data.tillaeg);
-    const maaneder = parseValue(data.maaneder);
+    const loen = parseVal(data.loen);
+    const normaleTimer = parseVal(data.normaleTimer);
+    const reduceredeTimer = parseVal(data.reduceredeTimer);
+    const tillaeg = parseVal(data.tillaeg);
+    const maaneder = parseVal(data.maaneder);
 
     // Timeløn = månedsløn / (normale_timer × 4,33)
     const hourlyRate = normaleTimer > 0 ? loen / (normaleTimer * 4.33) : 0;
@@ -97,26 +121,6 @@ const Calculator = ({ type, onBack }) => {
     };
   }
 
-  const InputField = ({ label, name, value, suffix = "kr" }) => (
-    <div className="mb-4">
-      <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
-      <div className="relative">
-        <input
-          type="text"
-          inputMode="decimal"
-          name={name}
-          value={value}
-          onChange={handleChange}
-          placeholder="0"
-          className="block w-full rounded-lg border-slate-200 border p-3 pr-12 focus:border-teal-500 focus:ring-teal-500"
-        />
-        <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
-          {suffix}
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <div className="max-w-md mx-auto animate-fade-in">
       <button 
@@ -135,22 +139,22 @@ const Calculator = ({ type, onBack }) => {
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mb-8">
         {isExpenses ? (
           <>
-            <InputField label="Medicin pr. måned" name="medicin" value={data.medicin} />
-            <InputField label="Transport pr. måned" name="transport" value={data.transport} />
-            <InputField label="Ekstra mad/kost pr. måned" name="mad" value={data.mad} />
-            <InputField label="Vask/rengøring pr. måned" name="vask" value={data.vask} />
-            <InputField label="Særligt udstyr pr. måned" name="udstyr" value={data.udstyr} />
-            <InputField label="Andre udgifter pr. måned" name="andre" value={data.andre} />
-            <InputField label="Antal måneder" name="maaneder" value={data.maaneder} suffix="mdr" />
-            <InputField label="Engangsudgift" name="engangs" value={data.engangs} />
+            <InputField label="Medicin pr. måned" name="medicin" value={data.medicin} onChange={handleChange} />
+            <InputField label="Transport pr. måned" name="transport" value={data.transport} onChange={handleChange} />
+            <InputField label="Ekstra mad/kost pr. måned" name="mad" value={data.mad} onChange={handleChange} />
+            <InputField label="Vask/rengøring pr. måned" name="vask" value={data.vask} onChange={handleChange} />
+            <InputField label="Særligt udstyr pr. måned" name="udstyr" value={data.udstyr} onChange={handleChange} />
+            <InputField label="Andre udgifter pr. måned" name="andre" value={data.andre} onChange={handleChange} />
+            <InputField label="Antal måneder" name="maaneder" value={data.maaneder} onChange={handleChange} suffix="mdr" />
+            <InputField label="Engangsudgift" name="engangs" value={data.engangs} onChange={handleChange} />
           </>
         ) : (
           <>
-            <InputField label="Månedsløn før fradrag" name="loen" value={data.loen} />
-            <InputField label="Normale arbejdstimer pr. uge" name="normaleTimer" value={data.normaleTimer} suffix="timer" />
-            <InputField label="Timer reduceret pr. uge" name="reduceredeTimer" value={data.reduceredeTimer} suffix="timer" />
-            <InputField label="Tabte faste tillæg pr. måned" name="tillaeg" value={data.tillaeg} />
-            <InputField label="Antal måneder reduktionen varer" name="maaneder" value={data.maaneder} suffix="mdr" />
+            <InputField label="Månedsløn før fradrag" name="loen" value={data.loen} onChange={handleChange} />
+            <InputField label="Normale arbejdstimer pr. uge" name="normaleTimer" value={data.normaleTimer} onChange={handleChange} suffix="timer" />
+            <InputField label="Timer reduceret pr. uge" name="reduceredeTimer" value={data.reduceredeTimer} onChange={handleChange} suffix="timer" />
+            <InputField label="Tabte faste tillæg pr. måned" name="tillaeg" value={data.tillaeg} onChange={handleChange} />
+            <InputField label="Antal måneder reduktionen varer" name="maaneder" value={data.maaneder} onChange={handleChange} suffix="mdr" />
           </>
         )}
       </div>
