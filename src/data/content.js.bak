@@ -1,11 +1,7 @@
-export const config = {
-  minimumThreshold: 5500, // kr pr år - opdateres efter nye satser
-};
-
 export const content = {
   welcome: {
     title: "Velkommen til StøtteGuide",
-    description: "At navigere i det kommunale system, når man har et barn med særlige behov, kan føles som en uoverskuelig labyrint. StøtteGuide é skabt til at hjælpe dig med at finde vej.\n\nHer kan du få et hurtigt overblik over de ydelser, der er mest relevante for din familie, og få hjælp til at tage det næste skridt i ansøgningsprocessen.",
+    description: "At navigere i det kommunale system, når man har et barn med særlige behov, kan føles som en uoverskuelig labyrint. StøtteGuide er skabt til at hjælpe dig med at finde vej.\n\nHer kan du få et hurtigt overblik over de ydelser, der er mest relevante for din familie, og få hjælp til at tage det næste skridt i ansøgningsprocessen.",
     rolesTitle: "Hvem er du?",
     roles: [
       { id: "autism_adhd", title: "Jeg er forælder til et barn med autisme/ADHD", description: "Vælg denne, hvis dit barn har en diagnose eller er under udredning for neuropsykiske udfordringer." },
@@ -83,88 +79,16 @@ export const content = {
   },
   serviceDetails: {
     "§41": { 
-      title: "Merudgifter", 
-      intro: "Merudgifter er ekstra udgifter, som familien har på grund af barnets handicap eller langvarige sygdom.", 
-      sections: [
-        {
-          title: "Hvad er det?",
-          text: "Merudgifter dækker de udgifter, familien ikke ville have haft, hvis barnet ikke havde haft det behov."
-        },
-        {
-          title: "Hvem kan søge?",
-          text: "Forældre til et barn under 18 år med betydelig og varigt nedsat fysisk eller psykisk funktionsevne eller en indgribende langvarig sygdom, når barnet bor hjemme."
-        },
-        {
-          title: "Hvad kan det dække?",
-          items: ["Medicin", "Transport", "Ekstra vask", "Kost", "Særligt udstyr", "Andre nødvendige ekstra udgifter"]
-        },
-        {
-          title: "Hvad skal du gøre?",
-          steps: [
-            "Skriv de ekstra udgifter ned.",
-            "Gem kvitteringer.",
-            "Saml lægepapirer og anden dokumentation.",
-            "Kontakt kommunen.",
-            "Bed om hjælp til at lave et overslag for det kommende år."
-          ]
-        },
-        {
-          title: "Hvad skal dokumenteres?",
-          items: ["Barnets behov/funktionsnedsættelse", "Hvilke udgifter der er tale om", "Hvorfor udgifterne er nødvendige", "Kvitteringer og notater"]
-        },
-        {
-          title: "Godt at vide",
-          text: "Kommunen vurderer den samlede situation. Der er typisk en minimumsgrænse, før hjælp kan udbetales."
-        }
-      ],
-      ctas: [
-        { label: "Se om jeg kan søge", action: "screening" },
-        { label: "Lav mit udgifts-overblik", action: "calculator" },
-        { label: "Skriv til kommunen", action: "templates" },
-        { label: "Gem dokumentation", action: "checklist" }
-      ]
+      title: "§41 - Merudgiftsydelse", 
+      what: "Dækning af nødvendige ekstraudgifter, som du har, fordi dit barn har en funktionsnedsættelse. Det kan være alt fra medicin og diæt til ekstra vask, kørsel til behandling eller særligt tøj.", 
+      who: "Forældre til børn under 18 år med betydelig og varig fysisk eller psykisk funktionsnedsættelse. Udgifterne skal overstige et vist minimumsbeløb pr. år (ca. 5.500 kr. i 2024-takst).", 
+      next: "Saml dokumentation for dine udgifter det seneste år og kontakt din sagsbehandler eller ansøg via borger.dk." 
     },
-    "§42": {
-      title: "Tabt arbejdsfortjeneste",
-      intro: "Tabt arbejdsfortjeneste er økonomisk kompensation til forældre, som må gå ned i tid eller stoppe med at arbejde for at passe et barn med handicap eller langvarig sygdom.",
-      sections: [
-        {
-          title: "Hvad er det?",
-          text: "Ydelsen dækker det indtægtstab, en forælder har, hvis det er nødvendigt at være hjemme hos barnet helt eller delvist."
-        },
-        {
-          title: "Hvem kan søge?",
-          text: "Forældre til et barn under 18 år med betydelig og varigt nedsat fysisk eller psykisk funktionsevne eller en indgribende kronisk eller langvarig lidelse, når det er nødvendigt, at en forælder passer barnet."
-        },
-        {
-          title: "Hvornår kan det være relevant?",
-          items: ["Barnet har mange indlæggelser.", "Barnet skal til hyppige kontroller.", "Barnet har behov for støtte i hjemmet.", "Forælderen må reducere arbejdstid eller stoppe midlertidigt."]
-        },
-        {
-          title: "Hvad skal du gøre?",
-          steps: [
-            "Skriv ned, hvor meget arbejde du mister.",
-            "Saml dokumentation for løn og arbejdstid.",
-            "Beskriv barnets behov.",
-            "Kontakt kommunen.",
-            "Bed om vurdering af tabt arbejdsfortjeneste."
-          ]
-        },
-        {
-          title: "Hvad skal dokumenteres?",
-          items: ["Barnets behov og funktionsnedsættelse", "Hvorfor pasning i hjemmet er nødvendig", "Lønindkomst før reduktion", "Arbejdstid før og efter", "Varighed og omfang af fravær"]
-        },
-        {
-          title: "Godt at vide",
-          text: "Ydelsen beregnes ud fra tidligere bruttoindtægt, og der er et loft på beløbet. Kommunen vurderer altid den konkrete sag."
-        }
-      ],
-      ctas: [
-        { label: "Se om jeg kan søge", action: "screening" },
-        { label: "Beregn mit indtægtstab", action: "calculator_tabt" },
-        { label: "Skriv til kommunen", action: "templates" },
-        { label: "Gem dokumentation", action: "checklist" }
-      ]
+    "§42": { 
+      title: "§42 - Tabt arbejdsfortjeneste", 
+      what: "Kompensation for den indtægt, du mister, hvis du er nødt til at passe dit barn i hjemmet i stedet for at passe dit arbejde. Det kan være i nogle få timer om ugen eller på fuld tid.", 
+      who: "Når det er en nødvendig konsekvens af barnets funktionsnedsættelse, at barnet passes i hjemmet, og det er mest hensigtsmæssigt.", 
+      next: "Der skal laves en konkret beregning af behovet. Tal med kommunen om en '§42-vurdering'." 
     },
     "§84": { 
       title: "§84 - Afløsning og aflastning", 

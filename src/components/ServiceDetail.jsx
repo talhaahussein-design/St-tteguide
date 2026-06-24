@@ -4,10 +4,6 @@ export function ServiceDetail({ category, details, onBack, onNavigate }) {
   const [openSection, setOpenSection] = useState(category.paragraphs[0])
 
   const handleCtaClick = (action) => {
-    if (action === 'calculator') {
-      alert('Beregner-funktionen kommer snart!')
-      return
-    }
     if (onNavigate) {
       onNavigate(action)
     }

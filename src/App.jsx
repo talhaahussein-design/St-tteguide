@@ -7,6 +7,7 @@ import { ServiceDetail } from './components/ServiceDetail'
 import { Checklist } from './components/Checklist'
 import { Tools } from './components/Tools'
 import { Rejection } from './components/Rejection'
+import Calculator from './components/Calculator'
 
 function App() {
   const [activeSection, setActiveSection] = useState(() => {
@@ -20,6 +21,7 @@ function App() {
     return saved ? JSON.parse(saved) : {}
   })
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [calculatorType, setCalculatorType] = useState(null)
 
   useEffect(() => {
     localStorage.setItem('lastSection', activeSection)
@@ -41,6 +43,20 @@ function App() {
     if (confirm('Er du sikker på, at du vil nulstille alle dine valg?')) {
       localStorage.clear()
       window.location.reload()
+    }
+  }
+
+  const handleNavigate = (action) => {
+    if (action === 'calculator') {
+      setCalculatorType('expenses')
+      setActiveSection('calculator')
+    } else if (action === 'calculator_tabt') {
+      setCalculatorType('income')
+      setActiveSection('calculator')
+    } else if (action === 'templates') {
+      setActiveSection('tools')
+    } else {
+      setActiveSection(action)
     }
   }
 
@@ -85,7 +101,14 @@ function App() {
             category={selectedCategory} 
             details={content.serviceDetails}
             onBack={() => setActiveSection('services')}
-            onNavigate={(section) => setActiveSection(section)}
+            onNavigate={handleNavigate}
+          />
+        )}
+
+        {activeSection === 'calculator' && (
+          <Calculator 
+            type={calculatorType}
+            onBack={() => setActiveSection('detail')}
           />
         )}
 
@@ -117,7 +140,7 @@ function App() {
             <button 
               key={item.id}
               onClick={() => setActiveSection(item.id)}
-              className={`flex flex-col items-center p-2 rounded-xl transition-all ${activeSection === item.id || (activeSection === 'detail' && item.id === 'services') ? 'text-teal-600 bg-teal-50/50' : 'text-slate-400'}`}
+              className={`flex flex-col items-center p-2 rounded-xl transition-all ${activeSection === item.id || (activeSection === 'detail' && item.id === 'services') || (activeSection === 'calculator' && item.id === 'services') ? 'text-teal-600 bg-teal-50/50' : 'text-slate-400'}`}
             >
               <span className="text-xl mb-1">{item.icon}</span>
               <span className="text-[10px] font-bold uppercase tracking-wider">{item.label}</span>
