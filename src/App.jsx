@@ -85,6 +85,7 @@ function App() {
             category={selectedCategory} 
             details={content.serviceDetails}
             onBack={() => setActiveSection('services')}
+            onNavigate={(section) => setActiveSection(section)}
           />
         )}
 

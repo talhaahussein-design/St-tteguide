@@ -79,10 +79,46 @@ export const content = {
   },
   serviceDetails: {
     "§41": { 
-      title: "§41 - Merudgiftsydelse", 
-      what: "Dækning af nødvendige ekstraudgifter, som du har, fordi dit barn har en funktionsnedsættelse. Det kan være alt fra medicin og diæt til ekstra vask, kørsel til behandling eller særligt tøj.", 
-      who: "Forældre til børn under 18 år med betydelig og varig fysisk eller psykisk funktionsnedsættelse. Udgifterne skal overstige et vist minimumsbeløb pr. år (ca. 5.500 kr. i 2024-takst).", 
-      next: "Saml dokumentation for dine udgifter det seneste år og kontakt din sagsbehandler eller ansøg via borger.dk." 
+      title: "Merudgifter", 
+      intro: "Merudgifter er ekstra udgifter, som familien har på grund af barnets handicap eller langvarige sygdom.", 
+      sections: [
+        {
+          title: "Hvad er det?",
+          text: "Merudgifter dækker de udgifter, familien ikke ville have haft, hvis barnet ikke havde haft det behov."
+        },
+        {
+          title: "Hvem kan søge?",
+          text: "Forældre til et barn under 18 år med betydelig og varigt nedsat fysisk eller psykisk funktionsevne eller en indgribende langvarig sygdom, når barnet bor hjemme."
+        },
+        {
+          title: "Hvad kan det dække?",
+          items: ["Medicin", "Transport", "Ekstra vask", "Kost", "Særligt udstyr", "Andre nødvendige ekstra udgifter"]
+        },
+        {
+          title: "Hvad skal du gøre?",
+          steps: [
+            "Skriv de ekstra udgifter ned.",
+            "Gem kvitteringer.",
+            "Saml lægepapirer og anden dokumentation.",
+            "Kontakt kommunen.",
+            "Bed om hjælp til at lave et overslag for det kommende år."
+          ]
+        },
+        {
+          title: "Hvad skal dokumenteres?",
+          items: ["Barnets behov/funktionsnedsættelse", "Hvilke udgifter der er tale om", "Hvorfor udgifterne er nødvendige", "Kvitteringer og notater"]
+        },
+        {
+          title: "Godt at vide",
+          text: "Kommunen vurderer den samlede situation. Der er typisk en minimumsgrænse, før hjælp kan udbetales."
+        }
+      ],
+      ctas: [
+        { label: "Se om jeg kan søge", action: "screening" },
+        { label: "Lav mit udgifts-overblik", action: "calculator" },
+        { label: "Skriv til kommunen", action: "tools" },
+        { label: "Gem dokumentation", action: "checklist" }
+      ]
     },
     "§42": { 
       title: "§42 - Tabt arbejdsfortjeneste", 
