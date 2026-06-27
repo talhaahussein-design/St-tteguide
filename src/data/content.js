@@ -30,34 +30,86 @@ export const content = {
     footer: "StøtteGuide er en uafhængig vejviser. Vi gemmer ikke dine personlige data, og vores mål er udelukkende at gøre lovgivningen forståelig og tilgængelig for dig."
   },
   kidsUniverse: {
-    title: "Børneunivers",
-    description: "Korte videoer og gode råd til dig",
+    title: "Klar til tur",
+    description: "Hvad skal du være opmærksom på, når du er ude at rejse?",
     categories: [
-      {
-        id: "learning",
-        title: "🧠 Læringskort",
-        description: "Om følelser, pauser, ro og hvordan du har det",
-        items: [
-          { title: "Vand og dig", emoji: "💧", text: "Husk at drikke vand hver dag. Det giver dig mere energi.", tip: "Sæt en alarm på din telefon" },
-          { title: "Mavefornemmelser", emoji: "🫣", text: "Din mave kan mærke, når du er glad, bange eller spændt.", tip: "Prøv at trække vejret dybt 3 gange" },
-          { title: "Følelser", emoji: "😊", text: "Alle følelser er okay. Det handler om, hvad du gør med dem.", tip: "Tegn hvordan du har det" },
-          { title: "Pauser", emoji: "☕", text: "Tag små pauser i løbet af dagen. Få ro og kom tilbage.", tip: "Sæt 5 minutters pause på" },
-          { title: "Ro", emoji: "🧘", text: "Find et roligt sted, når det hele bliver for meget.", tip: "Lyt til rolig musik" },
-          { title: "Sikkerhed", emoji: "🛡️", text: "Spørg altid en voksen, hvis du er i tvivl.", tip: "Sig til hvis noget føles forkert" }
-        ]
-      },
       {
         id: "travel",
         title: "🚗 Klar til tur",
-        description: "Tjeklister og gode råd til rejser og udflugter",
+        description: "Om lufthavne, fly, hoteller og alt det du møder på rejsen",
         items: [
-          { title: "Poolvand", emoji: "🏊", text: "Tjek om der er klor i vandet. Nogle reagerer på det.", tip: "Tag badebriller med" },
-          { title: "Mad på tur", emoji: "🍱", text: "Husk mad du kan lide. Nye steder kan have anderledes mad.", tip: "Tag snacks med hjemmefra" },
-          { title: "Toilet", emoji: "🚽", text: "Find ud af hvor toiletterne er, når I ankommer.", tip: "Tag vådservietter med" },
-          { title: "Varme", emoji: "☀️", text: "Husk solcreme, hat og nok vand når det er varmt.", tip: "Sæt dig i skyggen en gang imellem" },
-          { title: "Væske", emoji: "💧", text: "Drik vand jævnligt. Især når I er aktive.", tip: "Tag en drikkedunk med" },
-          { title: "Ventetid", emoji: "⏳", text: "Nogle gange skal man vente. Det kan være kedeligt.", tip: "Hav en lille leg eller bog med" },
-          { title: "Svimmelhed", emoji: "😵", text: "Hvis du bliver svimmel, så sæt dig ned og få noget at drikke.", tip: "Sig til en voksen med det samme" }
+          {
+            "title": "Lufthavnen",
+            "emoji": "✈️",
+            "text": "Lufthavnen er et sted med mange regler og ventetid.",
+            "tip": "Hav din yndlingsting i din håndbagage.",
+            "script": "Først tjekker vi taskerne ind. Så går vi gennem sikkerhedskontrollen, hvor vi tager overtøjet af. Bagefter venter vi ved gaten, indtil vi må gå ombord på flyet. Det er helt normalt, at der er meget ventetid.",
+            "images": ["seq_lufthavn_01.png", "seq_lufthavn_02.png", "seq_lufthavn_03.png"]
+          },
+          {
+            "title": "Flyvning",
+            "emoji": "🛩️",
+            "text": "Flyet tager dig højt op i luften til det nye land.",
+            "tip": "Tyg tyggegummi eller drik lidt vand, når flyet letter.",
+            "script": "Når flyet letter, kan det give et sjovt tryk i ørerne. Hvis du tygger eller drikker lidt vand, forsvinder trykket igen. Husk at have selen spændt, så du sidder sikkert i dit sæde under hele turen.",
+            "images": ["seq_flyvning_01.png", "seq_flyvning_02.png"]
+          },
+          {
+            "title": "Nyt hotelværelse",
+            "emoji": "🏨",
+            "text": "Dit nye værelse kan føles og lugte anderledes end hjemme.",
+            "tip": "Find toilettet og din kuffert som det første.",
+            "script": "Hotelværelset lugter måske af noget andet, end du er vant til, og sengen føles anderledes. Det er helt okay, at det tager lidt tid at vænne sig til det. Start med at finde ud af, hvor toilettet er, og pak din kuffert ud, så du har dine egne ting omkring dig.",
+            "images": ["seq_hotel_01.png", "seq_hotel_02.png"]
+          },
+          {
+            "title": "Pool og bad",
+            "emoji": "🏊",
+            "text": "Det er sjovt at bade, men vandet er ikke som det derhjemme.",
+            "tip": "Skyl dig med ferskvand, når du har badet i poolen.",
+            "script": "Vandet i poolen har klor i sig, så det holder sig rent. Du må aldrig drikke poolvandet, for det kan give dig ondt i maven. Når du er færdig med at bade, skal du skylle din krop med ferskvand, så din hud ikke klør.",
+            "images": ["seq_pool_01.png", "seq_pool_02.png", "seq_pool_03.png"]
+          },
+          {
+            "title": "Sol og varme",
+            "emoji": "☀️",
+            "text": "Solen er meget stærkere i udlandet end i Danmark.",
+            "tip": "Brug solcreme og solhat hver dag.",
+            "script": "Solen é stærk, og uden solcreme bliver din hud rød og gør ondt. Derfor skal du smøre dig ind i solcreme og bruge en hat, når du er udenfor. Det passer på din hud, så du kan lege videre i varmen uden smerter.",
+            "images": ["seq_sol_01.png", "seq_sol_02.png"]
+          },
+          {
+            "title": "Mad på rejsen",
+            "emoji": "🍱",
+            "text": "I et nyt land smager maden ofte anderledes, end du er vant til.",
+            "tip": "Hav altid en lille snack med, som du kender hjemmefra.",
+            "script": "Når man rejser, ser maden måske mærkelig ud eller smager anderledes. Det er helt okay, hvis du ikke har lyst til at smage det hele. Hvis du har dine egne snacks med, ved du altid, hvad du skal spise, og så føler du dig mere tryg.",
+            "images": ["seq_mad_01.png", "seq_mad_02.png"]
+          },
+          {
+            "title": "Toilet – hvor?",
+            "emoji": "🚽",
+            "text": "Det er rart at vide, hvor man kan komme på toilettet.",
+            "tip": "Find toilettet med det samme, når I kommer til et nyt sted.",
+            "script": "Når I ankommer til et nyt sted, så bed de voksne om at hjælpe med at finde toilettet som det første. Når du ved, hvor det er, giver det ro i din krop. Så skal du ikke lede efter det, når du pludselig har travlt.",
+            "images": ["seq_toilet_01.png", "seq_toilet_02.png"]
+          },
+          {
+            "title": "Når sanserne bliver for mange",
+            "emoji": "🙉",
+            "text": "Rejser er fulde af nye lyde, lugte og mange mennesker.",
+            "tip": "Brug høretelefoner eller find et stille sted til en pause.",
+            "script": "Nogle gange kan alle de nye indtryk blive for meget for din hjerne. Det kan larme meget, eller der kan være for mange mennesker. Det hjælper at tage høretelefoner på eller finde et roligt hjørne. Sig altid til en voksen, hvis du har brug for en pause.",
+            "images": ["seq_sanser_01.png", "seq_sanser_02.png"]
+          },
+          {
+            "title": "Bliv tæt på de voksne",
+            "emoji": "👥",
+            "text": "På nye steder med mange mennesker skal man passe på hinanden.",
+            "tip": "Hold dig tæt på din familie og find en person i uniform, hvis du bliver væk.",
+            "script": "I lufthavne og på feriesteder er der mange mennesker, og man kan let fare vild. Sørg altid for at blive tæt på din familie eller de voksne, du rejser med. Hvis I bliver væk fra hinanden, skal du finde en person, der arbejder der og har uniform på.",
+            "images": ["seq_taet_01.png", "seq_taet_02.png"]
+          }
         ]
       }
     ]
@@ -174,7 +226,7 @@ export const content = {
     },
     "§42": {
       title: "Tabt arbejdsfortjeneste",
-      intro: "Tabt arbejdsfortjeneste er økonomisk kompensation til forældre, som må gå ned i tid eller stoppe med at arbejde for at passe et barn med handicap eller langvarig sygdom.",
+      intro: "Tabt arbejdsfortjeneste é økonomisk kompensation til forældre, som må gå ned i tid eller stoppe med at arbejde for at passe et barn med handicap eller langvarig sygdom.",
       sections: [
         {
           title: "Hvad er det?",
@@ -292,6 +344,242 @@ export const content = {
       { name: "DUKH", text: "Gratis og uvildig rådgivning til borgere med handicap.", link: "https://www.dukh.dk" },
       { name: "Retshjælp", text: "Mange byer har gratis retshjælp, der kan hjælpe med at formulere klager." },
       { name: "Patientforeninger", text: "Foreninger som ADHD-foreningen eller Landsforeningen Autisme har ofte rådgivere." }
+    ]
+  },
+  socialStories: {
+    settings: {
+      nonVerbal: false,
+      sensoryMode: false
+    },
+    categories: [
+      {
+        id: "hjemme",
+        title: "🏠 Hjemme",
+        stories: [
+          {
+            id: "sengetid",
+            title: "Sengetid",
+            pages: [
+              { image: null, text: "Det er sengetid." },
+              { image: null, text: "Jeg børster tænder." },
+              { image: null, text: "Jeg tager nattøj på." },
+              { image: null, text: "Jeg lægger mig i sengen." },
+              { image: null, text: "Mor eller far læser en historie." },
+              { image: null, text: "Hvis jeg har brug for noget, kan jeg kalde." },
+              { image: null, text: "Godnat. I morgen er en ny dag." }
+            ]
+          }
+        ]
+      },
+      {
+        id: "skole",
+        title: "🏫 Skole",
+        stories: [
+          {
+            id: "foerste-skole-dag",
+            title: "Første skoledag",
+            pages: [
+              { image: null, text: "I dag skal jeg i skole." },
+              { image: null, text: "Jeg tager min taske på." },
+              { image: null, text: "Jeg kommer frem til skolen." },
+              { image: null, text: "Jeg siger hej til mi lærer." },
+              { image: null, text: "Vi skal lave noget nyt." },
+              { image: null, text: "Hvis det bliver svært, kan jeg få hjælp." },
+              { image: null, text: "Det gik godt. Godt klaret!" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "sundhed",
+        title: "🏥 Sundhed",
+        stories: [
+          {
+            id: "til-laegen",
+            title: "Til lægen",
+            pages: [
+              { image: null, text: "Vi skal til lægen." },
+              { image: null, text: "Vi venter i venteværelset." },
+              { image: null, text: "Lægen taler med mig." },
+              { image: null, text: "Lægen kigger på mig." },
+              { image: null, text: "Hvis jeg bliver bange, kan jeg sige stop." },
+              { image: null, text: "Bagefter er det slut." },
+              { image: null, text: "Det gik godt. Jeg får et klap på skulderen." }
+            ]
+          }
+        ]
+      },
+      {
+        id: "ferie",
+        title: "✈️ Ferie",
+        stories: [
+          {
+            id: "rejse-med-fly",
+            title: "Rejse med fly",
+            pages: [
+              { image: null, text: "Vi skal med fly." },
+              { image: null, text: "Vi tjekker tasker ind." },
+              { image: null, text: "Vi går gennem sikkerhed." },
+              { image: null, text: "Vi venter ved gaten." },
+              { image: null, text: "Vi sidder i flyet." },
+              { image: null, text: "Hvis jeg får tryk i ørerne, kan jeg tygge." },
+              { image: null, text: "Vi er fremme. Det gik godt!" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "indkoeb",
+        title: "🛒 Indkøb",
+        stories: [
+          {
+            id: "i-supermarked",
+            title: "I supermarkedet",
+            pages: [
+              { image: null, text: "Vi skal handle ind." },
+              { image: null, text: "Vi tager en indkøbsvogn." },
+              { image: null, text: "Vi finder varer på en liste." },
+              { image: null, text: "Der er mange mennesker og lyde." },
+              { image: null, text: "Hvis det bliver for meget, kan vi gå ud." },
+              { image: null, text: "Vi betaler i kassen." },
+              { image: null, text: "Vi tager hjem. Det var en god tur." }
+            ]
+          }
+        ]
+      },
+      {
+        id: "frisoer",
+        title: "💇 Frisør",
+        stories: [
+          {
+            id: "til-frisoeren",
+            title: "Til frisøren",
+            pages: [
+              { image: null, text: "Vi skal til frisøren." },
+              { image: null, text: "Jeg sidder i en stor stol." },
+              { image: null, text: "Frisøren klipper mit hår." },
+              { image: null, text: "Saksen siger klip-klip." },
+              { image: null, text: "Hvis jeg vil holde pause, siger jeg til." },
+              { image: null, text: "Frisøren børster håret af." },
+              { image: null, text: "Jeg ser godt ud. Det gik fint!" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "familie",
+        title: "👨‍👩‍👧 Familie",
+        stories: [
+          {
+            id: "besoeg-bedsteforaeldre",
+            title: "Besøg hos bedsteforældre",
+            pages: [
+              { image: null, text: "Vi skal besøge bedsteforældre." },
+              { image: null, text: "Vi kører eller går derhen." },
+              { image: null, text: "Jeg siger hej, da vi kommer." },
+              { image: null, text: "Vi spiser måske noget." },
+              { image: null, text: "Hvis jeg bliver træt, kan jeg sidde stille." },
+              { image: null, text: "Vi siger farvel og tager hjem." },
+              { image: null, text: "Det var hyggeligt. Godt klaret!" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "transport",
+        title: "🚌 Transport",
+        stories: [
+          {
+            id: "med-bus",
+            title: "Med bus",
+            pages: [
+              { image: null, text: "Vi skal med bussen." },
+              { image: null, text: "Vi venter ved busstoppestedet." },
+              { image: null, text: "Bussen kommer. Vi stiger på." },
+              { image: null, text: "Vi finder et sæde." },
+              { image: null, text: "Vi kigger ud ad vinduet." },
+              { image: null, text: "Bussen stopper. Vi stiger af." },
+              { image: null, text: "Vi er fremme. Det gik godt!" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "restaurant",
+        title: "🍽 Restaurant",
+        stories: [
+          {
+            id: "paa-restaurant",
+            title: "På restaurant",
+            pages: [
+              { image: null, text: "Vi skal på restaurant." },
+              { image: null, text: "Vi sidder ved et bord." },
+              { image: null, text: "Vi kigger på maden på kortet." },
+              { image: null, text: "Vi venter på maden." },
+              { image: null, text: "Hvis jeg ikke kan lide maden, er det okay." },
+              { image: null, text: "Vi spiser og hygger." },
+              { image: null, text: "Vi betaler og går hjem. Det var godt." }
+            ]
+          }
+        ]
+      },
+      {
+        id: "svommehal",
+        title: "🏊 Svømmehal",
+        stories: [
+          {
+            id: "i-svommehallen",
+            title: "I svømmehallen",
+            pages: [
+              { image: null, text: "Vi skal i svømmehallen." },
+              { image: null, text: "Jeg skifter tøj i omklædningen." },
+              { image: null, text: "Jeg tager bruser først." },
+              { image: null, text: "Vandet føles måske koldt." },
+              { image: null, text: "Jeg svømmer og leger." },
+              { image: null, text: "Hvis jeg fryser, kan jeg holde pause." },
+              { image: null, text: "Jeg tørrer mig og tager tøj på. Godt klaret!" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "forlystelse",
+        title: "🎢 Forlystelsespark",
+        stories: [
+          {
+            id: "i-forlystelsespark",
+            title: "I forlystelsesparken",
+            pages: [
+              { image: null, text: "Vi skal i forlystelsespark." },
+              { image: null, text: "Der er mange mennesker." },
+              { image: null, text: "Vi vælger en tur." },
+              { image: null, text: "Vi venter i kø." },
+              { image: null, text: "Turen starter. Det er sjovt." },
+              { image: null, text: "Hvis jeg bliver utryg, kan vi stoppe." },
+              { image: null, text: "Det var en god dag. Godt klaret!" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "foedselsdag",
+        title: "🎂 Fødselsdag",
+        stories: [
+          {
+            id: "min-foedselsdag",
+            title: "Min fødselsdag",
+            pages: [
+              { image: null, text: "I dag har jeg fødselsdag." },
+              { image: null, text: "Der kommer gæster." },
+              { image: null, text: "Vi synger og spiser kage." },
+              { image: null, text: "Jeg får gaver." },
+              { image: null, text: "Hvis der bliver for meget, kan jeg trække mig." },
+              { image: null, text: "Det er min dag." },
+              { image: null, text: "Tak for i dag. Det var fantastisk!" }
+            ]
+          }
+        ]
+      }
     ]
   }
 };
