@@ -1,39 +1,39 @@
 import { Link } from "react-router-dom";
 
 export default function ModuleCard({
-  emoji,
   title,
   subtitle,
+  emoji,
   color,
+  path,
 }) {
-  const path = {
-    "Følelser": "/feelings",
-    "BodyMap": "/bodymap",
-    "Kommunikation": "/communication",
-    "Social Stories": "/stories",
-    "Profil": "/profile",
-  };
-
   return (
-    <Link to={path[title]} className="moduleLink">
-      <div className="moduleCard">
+    <Link to={path} className="moduleLink">
 
-        <div
-          className="moduleIcon"
-          style={{ background: color }}
-        >
-          {emoji}
+      <article className="moduleCard">
+
+        <div className="moduleTop">
+
+          <div
+            className="moduleIcon"
+            style={{ background: color }}
+          >
+            {emoji}
+          </div>
+
+          <div className="moduleContent">
+            <h2>{title}</h2>
+            <p>{subtitle}</p>
+          </div>
+
         </div>
 
-        <h2>{title}</h2>
-
-        <p>{subtitle}</p>
-
-        <button>
+        <button className="moduleButton">
           Åbn →
         </button>
 
-      </div>
+      </article>
+
     </Link>
   );
 }
