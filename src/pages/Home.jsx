@@ -1,75 +1,30 @@
 import ModuleCard from "../components/ModuleCard";
 import BottomNav from "../components/BottomNav";
+
 const modules = [
   {
-    emoji: "😊",
     title: "Følelser",
-    subtitle: "Lær at forstå og udtrykke følelser.",
-    color: "#FFE7A3",
+    subtitle: "Forstå og udtryk dine følelser",
+    emoji: "😊",
+    color: "#FFE8A3",
+    path: "/feelings",
   },
   {
-    emoji: "🧍",
     title: "BodyMap",
     subtitle: "Hvor mærker du det i kroppen?",
-    color: "#D6F5E8",
+    emoji: "🧍",
+    color: "#D7F8E7",
+    path: "/bodymap",
   },
   {
-    emoji: "💬",
     title: "Kommunikation",
-    subtitle: "Vis hvad du har brug for.",
+    subtitle: "Vis hvad du har brug for",
+    emoji: "💬",
     color: "#DCEBFF",
+    path: "/communication",
   },
   {
-    emoji: "📖",
     title: "Social Stories",
-    subtitle: "Forbered dig på hverdagens situationer.",
-    color: "#F4D9FF",
-  },
-];
-
-export default function Home() {
-  return (
-    <main className="home" 
-      style={{ paddingBottom: "140px" }}>
-
-      <header className="topbar">
-        <div>
-          <h1>👋 God aften</h1>
-          <p>Velkommen til Støtteguiden</p>
-        </div>
-
-        <div className="avatar">
-          👤
-        </div>
-      </header>
-
-      <section className="hero">
-
-        <span className="badge">
-          🌿 Små skridt hver dag
-        </span>
-
-        <h2>Hvordan har du det i dag?</h2>
-
-        <div className="moods">
-          <button>😊</button>
-          <button>😐</button>
-          <button>😢</button>
-          <button>😡</button>
-        </div>
-
-      </section>
-
-      <h3 className="sectionTitle">
-        Dine værktøjer
-      </h3>
-
-      <div className="moduleGrid">
-        {modules.map((module) => (
-          <ModuleCard key={module.title} {...module} />
-        ))}
-      </div>
-<BottomNav />
-    </main>
-  );
-}
+    subtitle: "Øv hverdagens situationer",
+    emoji: "📖",
+    color: "#F
