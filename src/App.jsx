@@ -1,4 +1,4 @@
-<h1>TEST VERSION 123</h1>
+console.log("🔥 APP VERSION 999");
   import React, { useState } from "react";
 
 export default function App() {
