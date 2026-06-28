@@ -6,7 +6,7 @@
 
 body{
   font-family:Inter,system-ui,sans-serif;
-  background:#eef3fb;
+  background:#f6f8fc;
   color:#172033;
 }
 
@@ -35,8 +35,7 @@ body{
 }
 
 .topbar p{
-  color:#6b7280;
-  margin-top:6px;
+  color:#64748b;
 }
 
 .avatar{
@@ -106,7 +105,8 @@ body{
 }
 
 .moduleCard{
-  background:#ffffff;
+  background:white;
+}
   border-radius:28px;
   padding:22px;
   display:flex;
