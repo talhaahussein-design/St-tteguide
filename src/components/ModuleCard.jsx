@@ -7,23 +7,24 @@ export default function ModuleCard({
   return (
     <div className="moduleCard">
 
-      <div
-        className="moduleIcon"
-        style={{ background: color }}
-      >
-        {emoji}
-      </div>
+      <div className="moduleTop">
 
-      <div className="moduleContent">
+        <div
+          className="moduleIcon"
+          style={{ background: color }}
+        >
+          {emoji}
+        </div>
 
-        <h2>{title}</h2>
-
-        <p>{subtitle}</p>
+        <div className="moduleContent">
+          <h2>{title}</h2>
+          <p>{subtitle}</p>
+        </div>
 
       </div>
 
       <button className="moduleButton">
-        Åbn
+        Åbn →
       </button>
 
     </div>
