@@ -5,7 +5,7 @@ export default function ModuleCard({
   color,
 }) {
   return (
-    <div className="moduleCard">
+    <div className="moduleCard clickable">
 
       <div className="moduleTop">
 
@@ -22,10 +22,6 @@ export default function ModuleCard({
         </div>
 
       </div>
-
-      <button className="moduleButton">
-        Åbn →
-      </button>
 
     </div>
   );
