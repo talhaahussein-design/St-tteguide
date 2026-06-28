@@ -1,13 +1,22 @@
+import { Link } from "react-router-dom";
+
 export default function ModuleCard({
   emoji,
   title,
   subtitle,
   color,
 }) {
-  return (
-    <div className="moduleCard clickable">
+  const path = {
+    "Følelser": "/feelings",
+    "BodyMap": "/bodymap",
+    "Kommunikation": "/communication",
+    "Social Stories": "/stories",
+    "Profil": "/profile",
+  };
 
-      <div className="moduleTop">
+  return (
+    <Link to={path[title]} className="moduleLink">
+      <div className="moduleCard">
 
         <div
           className="moduleIcon"
@@ -16,13 +25,15 @@ export default function ModuleCard({
           {emoji}
         </div>
 
-        <div className="moduleContent">
-          <h2>{title}</h2>
-          <p>{subtitle}</p>
-        </div>
+        <h2>{title}</h2>
+
+        <p>{subtitle}</p>
+
+        <button>
+          Åbn →
+        </button>
 
       </div>
-
-    </div>
+    </Link>
   );
 }
