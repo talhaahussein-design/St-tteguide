@@ -1,54 +1,28 @@
-import { useState } from "react";
-import PageLayout from "../components/PageLayout";
-
-const areas = [
-  { id: "head", name: "😵 Hoved" },
-  { id: "chest", name: "❤️ Bryst" },
-  { id: "stomach", name: "🟠 Mave" },
-  { id: "arms", name: "💪 Arme" },
-  { id: "legs", name: "🦵 Ben" },
-];
+import { Link } from "react-router-dom";
 
 export default function BodyMap() {
-  const [selected, setSelected] = useState("");
-
   return (
-    <PageLayout title="BodyMap">
+    <main className="page">
 
-      <h2 className="sectionTitle">
-        Hvor mærker du det?
-      </h2>
+      <header className="pageHeader">
+        <Link to="/" className="backButton">
+          ←
+        </Link>
 
-      <div className="moduleGrid">
+        <div>
+          <h1>BodyMap</h1>
+          <p>Tryk på kroppen hvor det gør ondt</p>
+        </div>
+      </header>
 
-        {areas.map((area) => (
-          <div
-            key={area.id}
-            className="moduleCard"
-            style={{ cursor: "pointer" }}
-            onClick={() => setSelected(area.name)}
-          >
-            <h2>{area.name}</h2>
-            <p>Tryk for at markere området.</p>
-          </div>
-        ))}
+      <div className="bodyMap">
+
+        <div className="bodyPlaceholder">
+          🧍
+        </div>
 
       </div>
 
-      {selected && (
-        <div className="card" style={{ marginTop: 24 }}>
-          <h2>{selected}</h2>
-
-          <p style={{ marginTop: 12 }}>
-            Du har markeret dette område.
-          </p>
-
-          <button className="moduleButton">
-            Gem registrering
-          </button>
-        </div>
-      )}
-
-    </PageLayout>
+    </main>
   );
 }
