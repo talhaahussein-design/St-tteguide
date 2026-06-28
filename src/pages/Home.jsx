@@ -27,4 +27,45 @@ const modules = [
     title: "Social Stories",
     subtitle: "Øv hverdagens situationer",
     emoji: "📖",
-    color: "#F
+    color: "#F3D8FF",
+    path: "/stories",
+  },
+];
+
+export default function Home() {
+  return (
+    <main className="home">
+      <header className="topbar">
+        <div>
+          <h1>Hej 👋</h1>
+          <p>Hvordan har du det i dag?</p>
+        </div>
+
+        <div className="avatar">👤</div>
+      </header>
+
+      <section className="hero">
+        <span className="badge">🌿 Støtteguiden</span>
+
+        <h2>Vælg et værktøj</h2>
+
+        <div className="moods">
+          <button>😊</button>
+          <button>😐</button>
+          <button>😢</button>
+          <button>😡</button>
+        </div>
+      </section>
+
+      <h3 className="sectionTitle">Dine værktøjer</h3>
+
+      <div className="moduleGrid">
+        {modules.map((module) => (
+          <ModuleCard key={module.title} {...module} />
+        ))}
+      </div>
+
+      <BottomNav />
+    </main>
+  );
+}
