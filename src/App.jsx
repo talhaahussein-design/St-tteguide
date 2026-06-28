@@ -67,4 +67,22 @@ export default function App() {
 
         <div className="roleButtons">
 
-          {["Barn", "
+          {["Barn", "Forælder", "Fagperson", "Kommune"].map((r) => (
+            <button
+              key={r}
+              className={role === r ? "active" : ""}
+              onClick={() => setRole(r)}
+            >
+              {r}
+            </button>
+          ))}
+
+        </div>
+
+        <p>Aktiv profil: <strong>{role}</strong></p>
+
+      </section>
+
+    </div>
+  );
+}
