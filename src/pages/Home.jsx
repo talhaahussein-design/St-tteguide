@@ -1,5 +1,5 @@
 import ModuleCard from "../components/ModuleCard";
-
+import BottomNav from "../components/BottomNav";
 const modules = [
   {
     emoji: "😊",
@@ -68,7 +68,7 @@ export default function Home() {
           <ModuleCard key={module.title} {...module} />
         ))}
       </div>
-
+<BottomNav />
     </main>
   );
 }
