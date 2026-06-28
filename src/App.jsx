@@ -1,4 +1,4 @@
-console.log("🔥 APP VERSION 999");
+console.log("NEW DEPLOY TEST");
   import React, { useState } from "react";
 
 export default function App() {
