@@ -29,7 +29,8 @@ const modules = [
 
 export default function Home() {
   return (
-    <main className="home">
+    <main className="home" 
+      style={{ paddingBottom: "140px" }}>
 
       <header className="topbar">
         <div>
