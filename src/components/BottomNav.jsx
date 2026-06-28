@@ -1,26 +1,28 @@
+import { NavLink } from "react-router-dom";
+
 export default function BottomNav() {
   return (
     <nav className="bottomNav">
 
-      <button className="active">
-        <span>🏠</span>
-        <small>Hjem</small>
-      </button>
+      <NavLink to="/" end>
+        🏠
+        <span>Hjem</span>
+      </NavLink>
 
-      <button>
-        <span>😊</span>
-        <small>Følelser</small>
-      </button>
+      <NavLink to="/feelings">
+        😊
+        <span>Følelser</span>
+      </NavLink>
 
-      <button>
-        <span>🧍</span>
-        <small>BodyMap</small>
-      </button>
+      <NavLink to="/bodymap">
+        🧍
+        <span>BodyMap</span>
+      </NavLink>
 
-      <button>
-        <span>👤</span>
-        <small>Profil</small>
-      </button>
+      <NavLink to="/profile">
+        👤
+        <span>Profil</span>
+      </NavLink>
 
     </nav>
   );
