@@ -201,3 +201,21 @@ body{
 .bottomNav span{
   font-size:12px;
 }
+.bodyMap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:30px;
+}
+
+.bodyPlaceholder{
+  width:240px;
+  height:520px;
+  border-radius:30px;
+  background:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:180px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
