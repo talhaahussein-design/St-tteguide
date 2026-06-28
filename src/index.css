@@ -180,7 +180,7 @@ min-height:140px;
 }
 .bottomNav {
   position: fixed;
-  bottom: 20px;
+  bottom: 12px;
   left: 20px;
   right: 20px;
   height: 82px;
@@ -197,19 +197,16 @@ min-height:140px;
 }
 
 .bottomNav button{
-background:none;
-border:none;
+  pointer-events: auto;
 
-display:flex;
-flex-direction:column;
-
-align-items:center;
-
-gap:6px;
-
-font-size:14px;
-
-color:#64748b;
+  background:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  font-size:14px;
+  color:#64748b;
 }
 
 .bottomNav span{
