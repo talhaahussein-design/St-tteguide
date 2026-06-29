@@ -1,26 +1,27 @@
 import { Link } from "react-router-dom";
 import BottomNav from "./BottomNav";
 
-export default function PageLayout({ title, children }) {
+export default function PageLayout({ title, subtitle, children, action }) {
   return (
-    <main className="page">
-
-      <header className="pageHeader">
-
-        <Link to="/" className="backButton">
-          ←
-        </Link>
-
-        <h1>{title}</h1>
-
+    <div className="page-shell">
+      <header className="topbar">
+        <div className="topbar-logo">
+          <div className="topbar-logo-icon">🌿</div>
+          StøtteGuide
+        </div>
+        {action && <div className="topbar-right">{action}</div>}
       </header>
-
-      <section className="pageContent">
+      <div className="page-content">
+        <div className="page-header">
+          <Link to="/" className="back-btn">←</Link>
+          <div>
+            <h1>{title}</h1>
+            {subtitle && <p className="page-subtitle">{subtitle}</p>}
+          </div>
+        </div>
         {children}
-      </section>
-
+      </div>
       <BottomNav />
-
-    </main>
+    </div>
   );
 }
