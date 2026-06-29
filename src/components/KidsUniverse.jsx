@@ -1,82 +1,79 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export function KidsUniverse({ content, onBack }) {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [cat, setCat] = useState(null);
+  const [item, setItem] = useState(null);
 
-  if (selectedItem !== null) {
-    const category = content.categories.find(c => c.id === selectedCategory);
-    const item = category.items[selectedItem];
-    const isFirst = selectedItem === 0;
-    const isLast = selectedItem === category.items.length - 1;
-
+  if (item !== null) {
+    const category = content.categories.find(c => c.id === cat);
+    const cur = category.items[item];
     return (
-      <div style={{ maxWidth: 480, margin: '0 auto', padding: '20px 16px 120px' }}>
-        <button
-          onClick={() => setSelectedItem(null)}
-          className="kids-btn"
-          style={{ marginBottom: 20, justifyContent: 'flex-start', gap: 12 }}
-        >
-          <span style={{ fontSize: 22 }}>←</span>
-          <span>Tilbage til listen</span>
-        </button>
-
-        <div className="kids-card" style={{ padding: 28, textAlign: 'center', marginBottom: 20 }}>
-          <div style={{ fontSize: 72, marginBottom: 16, lineHeight: 1 }}>{item.emoji}</div>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: '#1a237e', marginBottom: 12 }}>
-            {item.title}
-          </h2>
-          <p style={{ fontSize: 17, color: '#37474f', lineHeight: 1.6, marginBottom: item.tip ? 20 : 0 }}>
-            {item.text}
-          </p>
-          {item.tip && (
-            <div style={{ background: '#e8f5e9', border: '2px solid #a5d6a7', borderRadius: 14, padding: '14px 18px', marginTop: 4 }}>
-              <p style={{ fontSize: 15, color: '#2e7d32', fontWeight: 700 }}>
-                💡 Tip: {item.tip}
-              </p>
-            </div>
-          )}
-        </div>
-
-        <div style={{ display: 'flex', gap: 12 }}>
-          <button onClick={() => setSelectedItem(i => i - 1)} disabled={isFirst} className="kids-btn" style={{ flex: 1, opacity: isFirst ? 0.3 : 1 }}>
-            ← Forrige
+      <div className="kids-shell">
+        <header className="kids-header">
+          <p className="kids-header-title">📖 {cur.title}</p>
+        </header>
+        <div style={{ padding: "16px 16px 100px" }}>
+          <button className="kids-btn" style={{ justifyContent: "flex-start", gap: 10, marginBottom: 16 }}
+            onClick={() => setItem(null)}>
+            <span style={{ fontSize: 20 }}>←</span> Tilbage til listen
           </button>
-          <button onClick={() => setSelectedItem(i => i + 1)} disabled={isLast} className="kids-btn" style={{ flex: 1, opacity: isLast ? 0.3 : 1 }}>
-            Næste →
-          </button>
-        </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 20 }}>
-          {category.items.map((_, i) => (
-            <button key={i} onClick={() => setSelectedItem(i)} style={{ width: i === selectedItem ? 28 : 10, height: 10, borderRadius: 5, border: 'none', background: i === selectedItem ? '#3949ab' : '#c5cae9', cursor: 'pointer', transition: 'width .2s', padding: 0 }} aria-label={`Gå til kort ${i + 1}`} />
-          ))}
+          <div className="kids-card" style={{ padding: 28, textAlign: "center", marginBottom: 16 }}>
+            <div style={{ fontSize: 72, marginBottom: 14, lineHeight: 1 }}>{cur.emoji}</div>
+            <h2 style={{ fontSize: 22, fontWeight: 900, color: "#1a237e", marginBottom: 10 }}>{cur.title}</h2>
+            <p style={{ fontSize: 16, color: "#37474f", lineHeight: 1.7 }}>{cur.text}</p>
+            {cur.tip && (
+              <div style={{ background: "#e8f5e9", border: "2px solid #a5d6a7", borderRadius: 14, padding: "12px 16px", marginTop: 16 }}>
+                <p style={{ fontSize: 14, color: "#2e7d32", fontWeight: 800 }}>💡 Tip: {cur.tip}</p>
+              </div>
+            )}
+          </div>
+
+          <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
+            <button className="kids-btn" style={{ flex: 1, opacity: item === 0 ? 0.3 : 1 }}
+              disabled={item === 0} onClick={() => setItem(i => i - 1)}>← Forrige</button>
+            <button className="kids-btn" style={{ flex: 1, opacity: item === category.items.length - 1 ? 0.3 : 1 }}
+              disabled={item === category.items.length - 1} onClick={() => setItem(i => i + 1)}>Næste →</button>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: 7 }}>
+            {category.items.map((_, i) => (
+              <button key={i} onClick={() => setItem(i)} style={{
+                width: i === item ? 28 : 9, height: 9, borderRadius: 5, border: "none", padding: 0,
+                background: i === item ? "#3949ab" : "#c5cae9", cursor: "pointer", transition: "width .2s",
+              }} />
+            ))}
+          </div>
         </div>
       </div>
     );
   }
 
-  if (selectedCategory !== null) {
-    const category = content.categories.find(c => c.id === selectedCategory);
+  if (cat !== null) {
+    const category = content.categories.find(c => c.id === cat);
     return (
-      <div style={{ maxWidth: 480, margin: '0 auto', padding: '20px 16px 120px' }}>
-        <button onClick={() => setSelectedCategory(null)} className="kids-btn" style={{ marginBottom: 20, justifyContent: 'flex-start', gap: 12 }}>
-          <span style={{ fontSize: 22 }}>←</span>
-          <span>Tilbage til kategorier</span>
-        </button>
-
-        <h2 style={{ fontSize: 22, fontWeight: 800, color: '#1a237e', marginBottom: 6 }}>{category.title}</h2>
-        <p style={{ fontSize: 15, color: '#546e7a', marginBottom: 20 }}>{category.description}</p>
-
-        <div style={{ display: 'grid', gap: 12 }}>
-          {category.items.map((item, idx) => (
-            <button key={idx} onClick={() => setSelectedItem(idx)} className="kids-card" style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px', width: '100%', background: 'white', textAlign: 'left', cursor: 'pointer', border: '2.5px solid #e8eaf6' }}>
-              <span style={{ fontSize: 36, flexShrink: 0 }}>{item.emoji}</span>
-              <div>
-                <p style={{ fontSize: 17, fontWeight: 700, color: '#1a237e' }}>{item.title}</p>
-                <p style={{ fontSize: 13, color: '#546e7a', marginTop: 2 }}>{item.text.slice(0, 60)}…</p>
+      <div className="kids-shell">
+        <header className="kids-header">
+          <p className="kids-header-title">{category.title}</p>
+        </header>
+        <div style={{ padding: "16px 16px 100px" }}>
+          <button className="kids-btn" style={{ justifyContent: "flex-start", gap: 10, marginBottom: 16 }}
+            onClick={() => setCat(null)}>
+            <span style={{ fontSize: 20 }}>←</span> Tilbage til kategorier
+          </button>
+          <p style={{ fontSize: 14, color: "#546e7a", marginBottom: 14 }}>{category.description}</p>
+          {category.items.map((it, i) => (
+            <button key={i} className="kids-card" onClick={() => setItem(i)} style={{
+              display: "flex", alignItems: "center", gap: 14, padding: "14px 18px",
+              width: "100%", background: "white", textAlign: "left", cursor: "pointer",
+              marginBottom: 10, border: "2.5px solid #e8eaf6",
+            }}>
+              <span style={{ fontSize: 34, flexShrink: 0 }}>{it.emoji}</span>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 16, fontWeight: 800, color: "#1a237e" }}>{it.title}</p>
+                <p style={{ fontSize: 12, color: "#546e7a", marginTop: 2 }}>{it.text.slice(0, 55)}…</p>
               </div>
-              <span style={{ marginLeft: 'auto', fontSize: 20, color: '#9fa8da', flexShrink: 0 }}>›</span>
+              <span style={{ color: "#9fa8da", fontSize: 20 }}>›</span>
             </button>
           ))}
         </div>
@@ -85,27 +82,27 @@ export function KidsUniverse({ content, onBack }) {
   }
 
   return (
-    <div style={{ maxWidth: 480, margin: '0 auto', padding: '20px 16px 120px' }}>
-      <button onClick={onBack} className="kids-btn" style={{ marginBottom: 24, justifyContent: 'flex-start', gap: 12 }}>
-        <span style={{ fontSize: 22 }}>←</span>
-        <span>Skift rolle</span>
-      </button>
-
-      <div style={{ background: '#e8eaf6', border: '2.5px solid #c5cae9', borderRadius: 20, padding: '24px 20px', textAlign: 'center', marginBottom: 24 }}>
-        <div style={{ fontSize: 56, marginBottom: 12 }}>🌟</div>
-        <h2 style={{ fontSize: 24, fontWeight: 800, color: '#1a237e', marginBottom: 6 }}>{content.title}</h2>
-        <p style={{ fontSize: 15, color: '#37474f' }}>{content.description}</p>
-      </div>
-
-      <p style={{ fontSize: 13, fontWeight: 700, color: '#7986cb', textTransform: 'uppercase', letterSpacing: '.5px', marginBottom: 12 }}>
-        Vælg en kategori
-      </p>
-
-      <div style={{ display: 'grid', gap: 12 }}>
-        {content.categories.map((cat) => (
-          <button key={cat.id} onClick={() => setSelectedCategory(cat.id)} className="kids-btn" style={{ flexDirection: 'column', alignItems: 'flex-start', padding: '20px 24px', gap: 4 }}>
-            <span style={{ fontSize: 20, fontWeight: 800 }}>{cat.title}</span>
-            <span style={{ fontSize: 14, color: '#5c6bc0', fontWeight: 500 }}>{cat.description}</span>
+    <div className="kids-shell">
+      <header className="kids-header">
+        <p className="kids-header-title">🌟 {content.title}</p>
+      </header>
+      <div style={{ padding: "16px 16px 100px" }}>
+        <button className="kids-btn" style={{ justifyContent: "flex-start", gap: 10, marginBottom: 18 }}
+          onClick={onBack}>
+          <span style={{ fontSize: 20 }}>←</span> Skift rolle
+        </button>
+        <div style={{ background: "#e8eaf6", border: "2.5px solid #c5cae9", borderRadius: 20, padding: "22px 18px", textAlign: "center", marginBottom: 18 }}>
+          <div style={{ fontSize: 52, marginBottom: 10 }}>🌟</div>
+          <p style={{ fontSize: 15, color: "#37474f" }}>{content.description}</p>
+        </div>
+        <p style={{ fontSize: 11, fontWeight: 800, color: "#7986cb", textTransform: "uppercase", letterSpacing: ".5px", marginBottom: 10 }}>
+          Vælg en kategori
+        </p>
+        {content.categories.map(c => (
+          <button key={c.id} className="kids-btn" onClick={() => setCat(c.id)}
+            style={{ flexDirection: "column", alignItems: "flex-start", padding: "18px 20px", gap: 3, marginBottom: 10 }}>
+            <span style={{ fontSize: 17, fontWeight: 900 }}>{c.title}</span>
+            <span style={{ fontSize: 13, color: "#5c6bc0", fontWeight: 500 }}>{c.description}</span>
           </button>
         ))}
       </div>
