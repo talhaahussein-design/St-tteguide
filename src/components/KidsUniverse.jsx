@@ -111,4 +111,4 @@ export function KidsUniverse({ content, onBack }) {
       </div>
     </div>
   );
-                          }
+}
