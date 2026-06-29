@@ -1,12 +1,18 @@
 import React from 'react'
 
 export function ServiceOverview({ content, answers, onSelectCategory }) {
-  // Filter categories based on presserende behov (Question 3 - index 2)
   const presserendeBehov = answers['needs'] || []
-  
+
+  const behovToCategoryId = {
+    'Økonomi': 'economy',
+    'Aflastning': 'respite',
+    'Skole/Institution': 'school',
+    'Fritid': 'leisure',
+  }
+
   const filteredCategories = content.categories.filter(cat => {
     if (presserendeBehov.length === 0) return true
-    return presserendeBehov.some(behov => cat.title.includes(behov))
+    return presserendeBehov.some(behov => behovToCategoryId[behov] === cat.id)
   })
 
   return (
@@ -18,7 +24,7 @@ export function ServiceOverview({ content, answers, onSelectCategory }) {
 
       <div className="grid gap-4">
         {filteredCategories.map(cat => (
-          <button 
+          <button
             key={cat.id}
             onClick={() => onSelectCategory(cat)}
             className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 text-left hover:border-teal-500 transition-colors group"
@@ -38,14 +44,11 @@ export function ServiceOverview({ content, answers, onSelectCategory }) {
           </button>
         ))}
       </div>
-      
+
       <div className="bg-teal-50 p-6 rounded-2xl border border-teal-100">
         <h4 className="font-bold text-teal-900 mb-2">Ikke det du søgte?</h4>
         <p className="text-teal-800 text-sm mb-4">Du kan altid se alle ydelser eller prøve screeningen igen.</p>
-        <button 
-          onClick={() => window.location.reload()}
-          className="text-teal-700 font-bold text-sm underline"
-        >
+        <button onClick={() => window.location.reload()} className="text-teal-700 font-bold text-sm underline">
           Prøv igen
         </button>
       </div>
