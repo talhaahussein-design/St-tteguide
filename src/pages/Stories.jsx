@@ -2,42 +2,27 @@ import { useState } from "react";
 import PageLayout from "../components/PageLayout";
 
 const stories = [
-  {
-    title: "Første skoledag",
-    emoji: "🏫",
-    color: "#DBEAFE",
-    steps: [
-      { emoji: "⏰", text: "Om morgenen vågner jeg og spiser morgenmad." },
-      { emoji: "🎒", text: "Jeg pakker min rygsæk med bøger og madpakke." },
-      { emoji: "🚶", text: "Jeg går til skolen med min forælder." },
-      { emoji: "👋", text: "Jeg hilser på læreren og finder min plads." },
-      { emoji: "😊", text: "Skoledagen slutter, og jeg tager hjem igen." },
-    ],
-  },
-  {
-    title: "Hos lægen",
-    emoji: "🏥",
-    color: "#D1FAE5",
-    steps: [
-      { emoji: "🚗", text: "Vi kører til lægehuset." },
-      { emoji: "🪑", text: "Vi venter i venteværelset." },
-      { emoji: "👨‍⚕️", text: "Lægen kalder mit navn, og vi går ind." },
-      { emoji: "🩺", text: "Lægen undersøger mig. Det er ikke farligt." },
-      { emoji: "🏠", text: "Vi tager hjem igen. Godt klaret!" },
-    ],
-  },
-  {
-    title: "Supermarkedet",
-    emoji: "🛒",
-    color: "#FEF3C7",
-    steps: [
-      { emoji: "📝", text: "Vi laver en indkøbsseddel hjemmefra." },
-      { emoji: "🚪", text: "Vi går ind i butikken." },
-      { emoji: "🛍️", text: "Vi finder varerne på listen." },
-      { emoji: "💳", text: "Vi betaler ved kassen." },
-      { emoji: "✅", text: "Vi er færdige og tager hjem!" },
-    ],
-  },
+  { title: "Første skoledag", emoji: "🏫", color: "#DBEAFE", steps: [
+    { emoji: "⏰", text: "Om morgenen vågner jeg og spiser morgenmad." },
+    { emoji: "🎒", text: "Jeg pakker min rygsæk med bøger og madpakke." },
+    { emoji: "🚶", text: "Jeg går til skolen med min forælder." },
+    { emoji: "👋", text: "Jeg hilser på læreren og finder min plads." },
+    { emoji: "😊", text: "Skoledagen slutter, og jeg tager hjem igen." },
+  ]},
+  { title: "Hos lægen", emoji: "🏥", color: "#D1FAE5", steps: [
+    { emoji: "🚗", text: "Vi kører til lægehuset." },
+    { emoji: "🪑", text: "Vi venter i venteværelset." },
+    { emoji: "👨‍⚕️", text: "Lægen kalder mit navn, og vi går ind." },
+    { emoji: "🩺", text: "Lægen undersøger mig. Det er ikke farligt." },
+    { emoji: "🏠", text: "Vi tager hjem igen. Godt klaret!" },
+  ]},
+  { title: "Supermarkedet", emoji: "🛒", color: "#FEF3C7", steps: [
+    { emoji: "📝", text: "Vi laver en indkøbsseddel hjemmefra." },
+    { emoji: "🚪", text: "Vi går ind i butikken." },
+    { emoji: "🛍️", text: "Vi finder varerne på listen." },
+    { emoji: "💳", text: "Vi betaler ved kassen." },
+    { emoji: "✅", text: "Vi er færdige og tager hjem!" },
+  ]},
 ];
 
 export default function Stories() {
@@ -46,38 +31,29 @@ export default function Stories() {
 
   if (selected !== null) {
     const story = stories[selected];
-    const current = story.steps[step];
+    const cur = story.steps[step];
     return (
-      <PageLayout title={story.title}>
-        <div className="card" style={{ textAlign: "center", padding: "32px 24px", marginBottom: 16 }}>
-          <div style={{ fontSize: 80, marginBottom: 20 }}>{current.emoji}</div>
-          <p style={{ fontSize: 19, fontWeight: 600, color: "var(--slate-700)", lineHeight: 1.5 }}>
-            {current.text}
-          </p>
+      <PageLayout title={story.title} subtitle={`Trin ${step + 1} af ${story.steps.length}`}>
+        <div className="card story-step-card">
+          <div className="story-step-emoji">{cur.emoji}</div>
+          <p className="story-step-text">{cur.text}</p>
         </div>
-
-        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginBottom: 20 }}>
+        <div className="dot-row">
           {story.steps.map((_, i) => (
-            <div key={i} style={{
-              width: i === step ? 28 : 10,
-              height: 10,
-              borderRadius: 5,
-              background: i === step ? "var(--teal-600)" : "var(--slate-200)",
-              transition: "width .2s",
-            }} />
+            <div key={i} className={`dot${i === step ? " active" : ""}`}
+              style={{ width: i === step ? 28 : 9 }} />
           ))}
         </div>
-
-        <div style={{ display: "flex", gap: 12 }}>
+        <div style={{ display: "flex", gap: 10 }}>
           {step > 0 && (
-            <button className="moduleButton" style={{ flex: 1, marginTop: 0 }}
+            <button className="btn-secondary" style={{ flex: 1 }}
               onClick={() => setStep(s => s - 1)}>← Tilbage</button>
           )}
           {step < story.steps.length - 1 ? (
-            <button className="moduleButton" style={{ flex: 1, marginTop: 0 }}
+            <button className="btn-primary" style={{ flex: 1 }}
               onClick={() => setStep(s => s + 1)}>Næste →</button>
           ) : (
-            <button className="moduleButton" style={{ flex: 1, marginTop: 0, background: "#16a34a" }}
+            <button className="btn-primary" style={{ flex: 1, background: "#16a34a", boxShadow: "0 4px 14px rgba(22,163,74,.28)" }}
               onClick={() => { setSelected(null); setStep(0); }}>Færdig ✓</button>
           )}
         </div>
@@ -86,27 +62,17 @@ export default function Stories() {
   }
 
   return (
-    <PageLayout title="Social Stories">
-      <p style={{ color: "var(--slate-500)", fontSize: 14, marginBottom: 20 }}>
-        Vælg en social story at øve
-      </p>
-      <div className="moduleGrid">
-        {stories.map((story, i) => (
-          <div key={story.title} className="moduleCard"
-            onClick={() => { setSelected(i); setStep(0); }}>
-            <div className="moduleTop">
-              <div className="moduleIcon" style={{ background: story.color }}>
-                {story.emoji}
-              </div>
-              <div className="moduleContent">
-                <h2>{story.title}</h2>
-                <p>{story.steps.length} trin</p>
-              </div>
-            </div>
-            <button className="moduleButton">Start story →</button>
+    <PageLayout title="Social Stories" subtitle="Vælg en story at øve">
+      {stories.map((story, i) => (
+        <div key={story.title} className="module-row" onClick={() => { setSelected(i); setStep(0); }}>
+          <div className="module-row-icon" style={{ background: story.color }}>{story.emoji}</div>
+          <div className="module-row-body">
+            <h3>{story.title}</h3>
+            <p>{story.steps.length} trin</p>
           </div>
-        ))}
-      </div>
+          <span className="module-row-arrow">›</span>
+        </div>
+      ))}
     </PageLayout>
   );
 }
