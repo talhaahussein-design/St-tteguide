@@ -3,21 +3,21 @@ import PageLayout from "../components/PageLayout";
 export default function Profile() {
   return (
     <PageLayout title="Profil">
-      <div className="card" style={{ textAlign: "center", padding: "32px 24px", marginBottom: 16 }}>
+      <div className="card" style={{ textAlign: "center", padding: "28px 20px", marginBottom: 12 }}>
         <div style={{
-          width: 80, height: 80, borderRadius: "50%",
-          background: "var(--teal-50)", border: "2px solid var(--teal-100)",
+          width: 76, height: 76, borderRadius: "50%",
+          background: "var(--blue-soft)", border: "2px solid var(--blue-mid)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 36, margin: "0 auto 16px",
+          fontSize: 34, margin: "0 auto 14px",
         }}>👤</div>
-        <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 6 }}>Din profil</h2>
+        <h2 style={{ fontSize: 19, fontWeight: 800, marginBottom: 5 }}>Din profil</h2>
         <p style={{ color: "var(--slate-500)", fontSize: 14 }}>
           StøtteGuide gemmer ikke dine personlige oplysninger.
         </p>
       </div>
 
-      <div className="card" style={{ marginBottom: 16 }}>
-        <h3 style={{ fontWeight: 700, fontSize: 16, marginBottom: 10 }}>Om appen</h3>
+      <div className="card">
+        <p className="section-label" style={{ marginTop: 0 }}>Om appen</p>
         <p style={{ color: "var(--slate-500)", fontSize: 14, lineHeight: 1.7 }}>
           StøtteGuide er en uafhængig vejviser til forældre, børn og fagpersoner
           i det kommunale støttesystem. Dine data forbliver på din enhed.
