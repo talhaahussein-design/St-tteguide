@@ -5,27 +5,12 @@ export const config = {
 export const content = {
   welcome: {
     title: "Velkommen til StøtteGuide",
-    description: "At navigere i det kommunale system, når man har et barn med særlige behov, kan føles som en uoverskuelig labyrint. StøtteGuide é skabt til at hjælpe dig med at finde vej.\n\nHer kan du få et hurtigt overblik over de ydelser, der er mest relevante for din familie, og få hjælp til at tage det næste skridt i ansøgningsprocessen.",
+    description: "At navigere i det kommunale system, når man har et barn med særlige behov, kan føles som en uoverskuelig labyrint. StøtteGuide er skabt til at hjælpe dig med at finde vej.\n\nHer kan du få et hurtigt overblik over de ydelser, der er mest relevante for din familie, og få hjælp til at tage det næste skridt i ansøgningsprocessen.",
     rolesTitle: "Hvem er du?",
     roles: [
-      { 
-        id: "foraeldre", 
-        title: "👤 Forældre", 
-        description: "Guide til kommunale ydelser, skabeloner og beregnere",
-        flow: "parent"
-      },
-      { 
-        id: "boern-unge", 
-        title: "🧒 Barn / Unge", 
-        description: "Korte videoer, tips og tjeklister til dig",
-        flow: "kids"
-      },
-      { 
-        id: "paedagog", 
-        title: "🏫 Pædagog / Fagperson", 
-        description: "Værktøjer og guides til dit arbejde",
-        flow: "professional"
-      }
+      { id: "foraeldre", title: "👤 Forældre", description: "Guide til kommunale ydelser, skabeloner og beregnere", flow: "parent" },
+      { id: "boern-unge", title: "🧒 Barn / Unge", description: "Korte videoer, tips og tjeklister til dig", flow: "kids" },
+      { id: "paedagog", title: "🏫 Pædagog / Fagperson", description: "Værktøjer og guides til dit arbejde", flow: "professional" }
     ],
     footer: "StøtteGuide er en uafhængig vejviser. Vi gemmer ikke dine personlige data, og vores mål er udelukkende at gøre lovgivningen forståelig og tilgængelig for dig."
   },
@@ -66,104 +51,44 @@ export const content = {
     title: "Find de rette ydelser",
     description: "Svar på disse 5 spørgsmål for at se, hvilken støtte der er mest relevant for jer lige nu.",
     questions: [
-      { 
-        id: "age", 
-        question: "Hvor gammelt er dit barn?", 
-        options: ["0-5 år (Småbørn/Børnehave)", "6-17 år (Skolealderen)", "18+ år (Overgang til voksenlivet)"] 
-      },
-      { 
-        id: "diagnosis", 
-        question: "Har dit barn en officiel diagnose?", 
-        options: ["Ja, barnet har en diagnose (fx autisme, ADHD).", "Nej, barnet er under udredning.", "Nej, vi oplever udfordringer, men er ikke i gang med udredning endnu."] 
-      },
-      { 
-        id: "needs", 
-        question: "Hvad er jeres mest presserende behov lige nu?", 
-        multi: true, 
+      { id: "age", question: "Hvor gammelt er dit barn?", options: ["0-5 år (Småbørn/Børnehave)", "6-17 år (Skolealderen)", "18+ år (Overgang til voksenlivet)"] },
+      { id: "diagnosis", question: "Har dit barn en officiel diagnose?", options: ["Ja, barnet har en diagnose (fx autisme, ADHD).", "Nej, barnet er under udredning.", "Nej, vi oplever udfordringer, men er ikke i gang med udredning endnu."] },
+      {
+        id: "needs",
+        question: "Hvad er jeres mest presserende behov lige nu?",
+        multi: true,
         options: [
           { label: "Økonomi", description: "Dækning af merudgifter eller kompensation for tabt arbejdsfortjeneste." },
           { label: "Aflastning", description: "Behov for en pause eller hjælp i hjemmet." },
           { label: "Skole/Institution", description: "Støtte til barnets trivsel i hverdagen." },
           { label: "Fritid", description: "Hjælp til at deltage i aktiviteter eller ledsagelse." }
-        ] 
+        ]
       },
-      { 
-        id: "contact", 
-        question: "Er I allerede i kontakt med en sagsbehandler i kommunen?", 
-        options: ["Ja, we har en fast sagsbehandler i børne-familieafdelingen.", "Ja, men vi hører sjældent fra dem.", "Nej, vi har ikke kontakt til kommunen endnu."] 
-      },
-      { 
-        id: "impact", 
-        question: "Hvordan påvirker barnets behov jeres hverdag?", 
-        options: ["Barnet kræver konstant opsyn og støtte.", "Vi har svært ved at få arbejdslivet til at hænge sammen.", "Barnet har brug for særlige hjælpemidler eller diæt."] 
-      }
+      { id: "contact", question: "Er I allerede i kontakt med en sagsbehandler i kommunen?", options: ["Ja, vi har en fast sagsbehandler i børne-familieafdelingen.", "Ja, men vi hører sjældent fra dem.", "Nej, vi har ikke kontakt til kommunen endnu."] },
+      { id: "impact", question: "Hvordan påvirker barnets behov jeres hverdag?", options: ["Barnet kræver konstant opsyn og støtte.", "Vi har svært ved at få arbejdslivet til at hænge sammen.", "Barnet har brug for særlige hjælpemidler eller diæt."] }
     ]
   },
   services: {
     title: "Overblik over støttemuligheder",
     description: "Baseret på din profil er her de kategorier af ydelser, der typisk er relevante. Klik på en kategori for at læse mere om de specifikke paragraffer.",
     categories: [
-      { 
-        id: "economy",
-        title: "💰 Økonomisk støtte", 
-        description: "Hvis dit barn har en betydelig og varig funktionsnedsættelse, kan du søge om dækning af de ekstra udgifter, det medfører, eller få kompensation, hvis du må gå ned i tid for at passe dit barn.", 
-        paragraphs: ["§41", "§42"] 
-      },
-      { 
-        id: "respite",
-        title: "Respite 🛋️ Aflastning og pasning", 
-        description: "Når hverdagen er tung, kan kommunen tilbyde aflastning enten i eget hjem, i en plejefamilie eller på en institution. Formålet er at give forældre og søskende et pusterum.", 
-        paragraphs: ["§84", "§44"] 
-      },
-      { 
-        id: "school",
-        title: "🏫 Støtte i skole og dagtilbud", 
-        description: "Har dit barn brug for ekstra støtte til at trives i skolen eller børnehaven? Dette kan være alt fra pædagogisk støtte til specialundervisning eller hjælpemidler.", 
-        paragraphs: ["Folkeskoleloven", "Dagtilbudsloven"] 
-      },
-      { 
-        id: "leisure",
-        title: "🏃 Fritid og socialt liv", 
-        description: "Støtte til at barnet kan deltage i fritidsaktiviteter, eller en ledsagerordning til unge over 12 år, der ikke kan færdes alene.", 
-        paragraphs: ["§45"] 
-      }
+      { id: "economy", title: "💰 Økonomisk støtte", description: "Hvis dit barn har en betydelig og varig funktionsnedsættelse, kan du søge om dækning af de ekstra udgifter, det medfører, eller få kompensation, hvis du må gå ned i tid for at passe dit barn.", paragraphs: ["§41", "§42"] },
+      { id: "respite", title: "🛋️ Aflastning og pasning", description: "Når hverdagen er tung, kan kommunen tilbyde aflastning enten i eget hjem, i en plejefamilie eller på en institution. Formålet er at give forældre og søskende et pusterum.", paragraphs: ["§84", "§44"] },
+      { id: "school", title: "🏫 Støtte i skole og dagtilbud", description: "Har dit barn brug for ekstra støtte til at trives i skolen eller børnehaven? Dette kan være alt fra pædagogisk støtte til specialundervisning eller hjælpemidler.", paragraphs: ["Folkeskoleloven", "Dagtilbudsloven"] },
+      { id: "leisure", title: "🏃 Fritid og socialt liv", description: "Støtte til at barnet kan deltage i fritidsaktiviteter, eller en ledsagerordning til unge over 12 år, der ikke kan færdes alene.", paragraphs: ["§45"] }
     ]
   },
   serviceDetails: {
-    "§41": { 
-      title: "Merudgifter", 
-      intro: "Merudgifter er ekstra udgifter, som familien har på grund af barnets handicap eller langvarige sygdom.", 
+    "§41": {
+      title: "Merudgifter",
+      intro: "Merudgifter er ekstra udgifter, som familien har på grund af barnets handicap eller langvarige sygdom.",
       sections: [
-        {
-          title: "Hvad er det?",
-          text: "Merudgifter dækker de udgifter, familien ikke ville have haft, hvis barnet ikke havde haft det behov."
-        },
-        {
-          title: "Hvem kan søge?",
-          text: "Forældre til et barn under 18 år med betydelig og varigt nedsat fysisk eller psykisk funktionsevne eller en indgribende langvarig sygdom, når barnet bor hjemme."
-        },
-        {
-          title: "Hvad kan det dække?",
-          items: ["Medicin", "Transport", "Ekstra vask", "Kost", "Særligt udstyr", "Andre nødvendige ekstra udgifter"]
-        },
-        {
-          title: "Hvad skal du gøre?",
-          steps: [
-            "Skriv de ekstra udgifter ned.",
-            "Gem kvitteringer.",
-            "Saml lægepapirer og anden dokumentation.",
-            "Kontakt kommunen.",
-            "Bed om hjælp til at lave et overslag for det kommende år."
-          ]
-        },
-        {
-          title: "Hvad skal dokumenteres?",
-          items: ["Barnets behov/funktionsnedsættelse", "Hvilke udgifter der er tale om", "Hvorfor udgifterne er nødvendige", "Kvitteringer og notater"]
-        },
-        {
-          title: "Godt at vide",
-          text: "Kommunen vurderer den samlede situation. Der er typisk en minimumsgrænse, før hjælp kan udbetales."
-        }
+        { title: "Hvad er det?", text: "Merudgifter dækker de udgifter, familien ikke ville have haft, hvis barnet ikke havde haft det behov." },
+        { title: "Hvem kan søge?", text: "Forældre til et barn under 18 år med betydelig og varigt nedsat fysisk eller psykisk funktionsevne eller en indgribende langvarig sygdom, når barnet bor hjemme." },
+        { title: "Hvad kan det dække?", items: ["Medicin", "Transport", "Ekstra vask", "Kost", "Særligt udstyr", "Andre nødvendige ekstra udgifter"] },
+        { title: "Hvad skal du gøre?", steps: ["Skriv de ekstra udgifter ned.", "Gem kvitteringer.", "Saml lægepapirer og anden dokumentation.", "Kontakt kommunen.", "Bed om hjælp til at lave et overslag for det kommende år."] },
+        { title: "Hvad skal dokumenteres?", items: ["Barnets behov/funktionsnedsættelse", "Hvilke udgifter der er tale om", "Hvorfor udgifterne er nødvendige", "Kvitteringer og notater"] },
+        { title: "Godt at vide", text: "Kommunen vurderer den samlede situation. Der er typisk en minimumsgrænse, før hjælp kan udbetales." }
       ],
       ctas: [
         { label: "Se om jeg kan søge", action: "screening" },
@@ -176,36 +101,12 @@ export const content = {
       title: "Tabt arbejdsfortjeneste",
       intro: "Tabt arbejdsfortjeneste er økonomisk kompensation til forældre, som må gå ned i tid eller stoppe med at arbejde for at passe et barn med handicap eller langvarig sygdom.",
       sections: [
-        {
-          title: "Hvad er det?",
-          text: "Ydelsen dækker det indtægtstab, en forælder har, hvis det er nødvendigt at være hjemme hos barnet helt eller delvist."
-        },
-        {
-          title: "Hvem kan søge?",
-          text: "Forældre til et barn under 18 år med betydelig og varigt nedsat fysisk eller psykisk funktionsevne eller en indgribende kronisk eller langvarig lidelse, når det er nødvendigt, at en forælder passer barnet."
-        },
-        {
-          title: "Hvornår kan det være relevant?",
-          items: ["Barnet har mange indlæggelser.", "Barnet skal til hyppige kontroller.", "Barnet har behov for støtte i hjemmet.", "Forælderen må reducere arbejdstid eller stoppe midlertidigt."]
-        },
-        {
-          title: "Hvad skal du gøre?",
-          steps: [
-            "Skriv ned, hvor meget arbejde du mister.",
-            "Saml dokumentation for løn og arbejdstid.",
-            "Beskriv barnets behov.",
-            "Kontakt kommunen.",
-            "Bed om vurdering af tabt arbejdsfortjeneste."
-          ]
-        },
-        {
-          title: "Hvad skal dokumenteres?",
-          items: ["Barnets behov og funktionsnedsættelse", "Hvorfor pasning i hjemmet er nødvendig", "Lønindkomst før reduktion", "Arbejdstid før og efter", "Varighed og omfang af fravær"]
-        },
-        {
-          title: "Godt at vide",
-          text: "Ydelsen beregnes ud fra tidligere bruttoindtægt, og der er et loft på beløbet. Kommunen vurderer altid den konkrete sag."
-        }
+        { title: "Hvad er det?", text: "Ydelsen dækker det indtægtstab, en forælder har, hvis det er nødvendigt at være hjemme hos barnet helt eller delvist." },
+        { title: "Hvem kan søge?", text: "Forældre til et barn under 18 år med betydelig og varigt nedsat fysisk eller psykisk funktionsevne eller en indgribende kronisk eller langvarig lidelse, når det er nødvendigt, at en forælder passer barnet." },
+        { title: "Hvornår kan det være relevant?", items: ["Barnet har mange indlæggelser.", "Barnet skal til hyppige kontroller.", "Barnet har behov for støtte i hjemmet.", "Forælderen må reducere arbejdstid eller stoppe midlertidigt."] },
+        { title: "Hvad skal du gøre?", steps: ["Skriv ned, hvor meget arbejde du mister.", "Saml dokumentation for løn og arbejdstid.", "Beskriv barnets behov.", "Kontakt kommunen.", "Bed om vurdering af tabt arbejdsfortjeneste."] },
+        { title: "Hvad skal dokumenteres?", items: ["Barnets behov og funktionsnedsættelse", "Hvorfor pasning i hjemmet er nødvendig", "Lønindkomst før reduktion", "Arbejdstid før og efter", "Varighed og omfang af fravær"] },
+        { title: "Godt at vide", text: "Ydelsen beregnes ud fra tidligere bruttoindtægt, og der er et loft på beløbet. Kommunen vurderer altid den konkrete sag." }
       ],
       ctas: [
         { label: "Se om jeg kan søge", action: "screening" },
@@ -214,31 +115,16 @@ export const content = {
         { label: "Gem dokumentation", action: "checklist" }
       ]
     },
-    "§84": { 
-      title: "§84 - Afløsning og aflastning", 
-      what: "Afløsning gives i hjemmet (fx en person der kommer og passer barnet), mens aflastning foregår uden for hjemmet (fx i en aflastningsinstitution eller hos en netværksfamilie).", 
-      who: "Forældre, der har et særligt behov for aflastning for at kunne opretholde en almindelig hverdag og give omsorg til barnet og eventuelle søskende.", 
-      next: "Beskriv jeres ugeprogram for sagsbehandleren for at synliggøre behovet for pauser." 
-    },
-    "§45": { 
-      title: "§45 - Ledsageordning", 
-      what: "Unge mellem 12 og 18 år kan få 15 timers ledsagelse om måneden til aktiviteter uden for hjemmet, som de ikke kan deltage i alene.", 
-      who: "Børn/unge der ikke kan færdes alene på grund af deres funktionsnedsættelse.", 
-      next: "Ansøg specifikt om 'Ledsagelse til unge' hos din kommune." 
-    }
+    "§84": { title: "§84 - Afløsning og aflastning", what: "Afløsning gives i hjemmet (fx en person der kommer og passer barnet), mens aflastning foregår uden for hjemmet (fx i en aflastningsinstitution eller hos en netværksfamilie).", who: "Forældre, der har et særligt behov for aflastning for at kunne opretholde en almindelig hverdag og give omsorg til barnet og eventuelle søskende.", next: "Beskriv jeres ugeprogram for sagsbehandleren for at synliggøre behovet for pauser." },
+    "§44": { title: "§44 - Hjælp til dækning af tabt arbejdsfortjeneste ved pasning af nærtstående", what: "§44 giver mulighed for, at kommunen kan bevilge hjælp til dækning af udgifter til pasning af et barn med handicap i eget hjem, som supplement til aflastning efter §84.", who: "Forældre til børn med betydelig og varigt nedsat fysisk eller psykisk funktionsevne, der har behov for pasning i hjemmet.", next: "Kontakt din sagsbehandler i Børne- og familieafdelingen for at drøfte, om §44 kan kombineres med §84 i jeres situation." },
+    "§45": { title: "§45 - Ledsageordning", what: "Unge mellem 12 og 18 år kan få 15 timers ledsagelse om måneden til aktiviteter uden for hjemmet, som de ikke kan deltage i alene.", who: "Børn/unge der ikke kan færdes alene på grund af deres funktionsnedsættelse.", next: "Ansøg specifikt om 'Ledsagelse til unge' hos din kommune." },
+    "Folkeskoleloven": { title: "Folkeskoleloven – Støtte i skolen", what: "Folkeskoleloven sikrer, at alle børn har ret til undervisning tilpasset deres behov. Det kan være specialundervisning, støttetimer, hjælpemidler eller placering i specialklasse eller specialskole.", who: "Alle børn i folkeskolealderen med behov for særlig støtte, uanset om de har en diagnose eller ej. Skolen har pligt til at tilbyde støtte, når der er behov for det.", next: "Kontakt skolens leder eller PP-rådgiveren (Pædagogisk Psykologisk Rådgivning) og bed om en vurdering af barnets støttebehov." },
+    "Dagtilbudsloven": { title: "Dagtilbudsloven – Støtte i dagtilbud", what: "Dagtilbudsloven giver kommunen mulighed for at bevilge ekstra støtte til børn i vuggestue og børnehave, fx en fast støttepædagog, reduceret børnehavetid eller specialbørnehave.", who: "Børn i alderen 0-6 år i dagtilbud med særlige behov for støtte til trivsel og udvikling.", next: "Tal med lederen af barnets dagtilbud eller kontakt kommunens PPR for at anmode om en vurdering og evt. støttepædagog." }
   },
   checklist: {
     title: "Tjekliste: Før du ansøger",
     description: "Når du søger kommunen om støtte, øger det dine chancer for et hurtigt og korrekt svar, hvis du har forberedt dig godt. Brug denne tjekliste:",
-    items: [
-      "Indhent lægelig dokumentation",
-      "Beskriv hverdagen",
-      "Dokumenter merudgifter",
-      "Børnefaglig udtalelse",
-      "Find din sagsbehandler",
-      "Forbered spørgsmål til mødet",
-      "Hav en bisidder klar"
-    ],
+    items: ["Indhent lægelig dokumentation", "Beskriv hverdagen", "Dokumenter merudgifter", "Børnefaglig udtalelse", "Find din sagsbehandler", "Forbered spørgsmål til mødet", "Hav en bisidder klar"],
     footer: "Husk: Du har altid ret til at få en skriftlig begrundelse for et afslag."
   },
   municipality: {
@@ -261,14 +147,14 @@ export const content = {
     title: "Skabeloner til kontakt",
     description: "Brug disse skabeloner som udgangspunkt, når du skriver til din sagsbehandler. Husk at tilrette dem til din specifikke situation.",
     items: [
-      { 
-        title: "Skabelon 1: Første henvendelse / Ansøgning om støtte", 
-        subject: "Ansøgning om støtte efter Servicelovens §41 og §42 – [Barnets Navn] [CPR-nummer]", 
-        body: "Kære [Navn på sagsbehandler eller Afdelingsnavn],\n\nJeg skriver til jer, da jeg ønsker at ansøge om støtte til mit barn, [Barnets Navn], der har [Diagnose/funktionsnedsættelse].\n\nVi oplever i hverdagen betydelige udfordringer i forhold til [beskriv kort udfordringerne, fx pasning, økonomi, transport]. Derfor søger vi hermed om:\n* Dækning af merudgifter jf. Servicelovens §41.\n* Vurdering af behov for tabt arbejdsfortjeneste jf. Servicelovens §42.\n\nJeg har vedhæftet følgende dokumentation:\n* [Fx lægeerklæring]\n* [Fx beskrivelse af hverdagen]\n\nJeg ser frem til at høre fra jer vedrørende det videre forløb og forventet sagsbehandlingstid.\n\nMed venlig hilsen,\n[Dit Navn]\n[Dit Telefonnummer]" 
+      {
+        title: "Skabelon 1: Første henvendelse / Ansøgning om støtte",
+        subject: "Ansøgning om støtte efter Servicelovens §41 og §42 – [Barnets Navn] [CPR-nummer]",
+        body: "Kære [Navn på sagsbehandler eller Afdelingsnavn],\n\nJeg skriver til jer, da jeg ønsker at ansøge om støtte til mit barn, [Barnets Navn], der har [Diagnose/funktionsnedsættelse].\n\nVi oplever i hverdagen betydelige udfordringer i forhold til [beskriv kort udfordringerne, fx pasning, økonomi, transport]. Derfor søger vi hermed om:\n* Dækning af merudgifter jf. Servicelovens §41.\n* Vurdering af behov for tabt arbejdsfortjeneste jf. Servicelovens §42.\n\nJeg har vedhæftet følgende dokumentation:\n* [Fx lægeerklæring]\n* [Fx beskrivelse af hverdagen]\n\nJeg ser frem til at høre fra jer vedrørende det videre forløb og forventet sagsbehandlingstid.\n\nMed venlig hilsen,\n[Dit Navn]\n[Dit Telefonnummer]"
       },
-      { 
-        title: "Skabelon 2: Huskeliste til møde (Dagsorden)", 
-        body: "Dagsorden for møde d. [Dato] vedr. [Barnets Navn]\n\n1. Introduktion og formål med mødet.\n2. Gennemgang af barnets aktuelle trivsel og behov.\n3. Status på ansøgning om [Ydelse, fx §41].\n4. Drøftelse af behov for aflastning/pasning.\n5. Aftaler om næste skridt og tidsplan for afgørelser." 
+      {
+        title: "Skabelon 2: Huskeliste til møde (Dagsorden)",
+        body: "Dagsorden for møde d. [Dato] vedr. [Barnets Navn]\n\n1. Introduktion og formål med mødet.\n2. Gennemgang af barnets aktuelle trivsel og behov.\n3. Status på ansøgning om [Ydelse, fx §41].\n4. Drøftelse af behov for aflastning/pasning.\n5. Aftaler om næste skridt og tidsplan for afgørelser."
       }
     ],
     rulesTitle: "Gode huskeregler:",
