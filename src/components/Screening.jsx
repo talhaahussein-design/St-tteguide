@@ -1,88 +1,60 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 export function Screening({ content, onComplete, onBack }) {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [answers, setAnswers] = useState({})
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState({});
 
-  const question = content.questions[currentStep]
-  const progress = ((currentStep + 1) / content.questions.length) * 100
+  const q = content.questions[step];
+  const progress = ((step + 1) / content.questions.length) * 100;
 
-  const handleOptionSelect = (option) => {
-    if (question.multi) {
-      const selected = answers[question.id] || []
-      const newSelected = selected.includes(option.label)
-        ? selected.filter(s => s !== option.label)
-        : [...selected, option.label]
-      setAnswers({ ...answers, [question.id]: newSelected })
+  const handleSelect = (option) => {
+    if (q.multi) {
+      const cur = answers[q.id] || [];
+      const label = option.label || option;
+      setAnswers({ ...answers, [q.id]: cur.includes(label) ? cur.filter(s => s !== label) : [...cur, label] });
     } else {
-      setAnswers({ ...answers, [question.id]: option })
+      setAnswers({ ...answers, [q.id]: option });
     }
-  }
+  };
 
-  const nextStep = () => {
-    if (currentStep < content.questions.length - 1) {
-      setCurrentStep(currentStep + 1)
-    } else {
-      onComplete(answers)
-    }
-  }
-
-  const prevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1)
-    } else {
-      onBack()
-    }
-  }
+  const canNext = q.multi ? (answers[q.id] || []).length > 0 : !!answers[q.id];
 
   return (
-    <section className="space-y-6">
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-        <div className="w-full bg-slate-100 h-2 rounded-full mb-6">
-          <div 
-            className="bg-teal-500 h-2 rounded-full transition-all duration-300" 
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-
-        <h2 className="text-xl font-bold text-teal-800 mb-4">{question.question}</h2>
-        
-        <div className="space-y-3">
-          {question.options.map((option, idx) => {
-            const isSelected = question.multi 
-              ? (answers[question.id] || []).includes(option.label || option)
-              : answers[question.id] === option
-
-            return (
-              <button 
-                key={idx}
-                onClick={() => handleOptionSelect(option)}
-                className={`w-full p-4 rounded-xl border text-left transition-colors ${
-                  isSelected 
-                    ? 'bg-teal-50 border-teal-500 text-teal-900' 
-                    : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                <div className="font-semibold">{option.label || option}</div>
-                {option.description && <div className="text-sm text-slate-500 mt-1">{option.description}</div>}
-              </button>
-            )
-          })}
-        </div>
-
-        <div className="mt-8 flex justify-between items-center">
-          <button onClick={prevStep} className="text-slate-500 font-medium">
-            {currentStep === 0 ? 'Forside' : 'Tilbage'}
-          </button>
-          <button 
-            onClick={nextStep}
-            disabled={!answers[question.id] || (question.multi && answers[question.id].length === 0)}
-            className="bg-teal-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-teal-100 disabled:opacity-50 disabled:shadow-none transition-all"
-          >
-            {currentStep === content.questions.length - 1 ? 'Se resultater' : 'Næste'}
-          </button>
-        </div>
+    <div>
+      <div className="progress-bar-track">
+        <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
       </div>
-    </section>
-  )
+      <p style={{ fontSize: 12, color: "var(--slate-400)", marginBottom: 14 }}>
+        Spørgsmål {step + 1} af {content.questions.length}
+      </p>
+      <h2 style={{ fontSize: 18, fontWeight: 800, color: "var(--slate-900)", marginBottom: 16, letterSpacing: "-0.3px" }}>
+        {q.question}
+      </h2>
+
+      {q.options.map((option, i) => {
+        const label = option.label || option;
+        const isSel = q.multi ? (answers[q.id] || []).includes(label) : answers[q.id] === option;
+        return (
+          <button key={i} className={`screening-option${isSel ? " selected" : ""}`} onClick={() => handleSelect(option)}>
+            <div className="screening-option-title">{label}</div>
+            {option.description && <div className="screening-option-desc">{option.description}</div>}
+          </button>
+        );
+      })}
+
+      <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
+        <button className="btn-secondary" style={{ flex: 1 }} onClick={() => step === 0 ? onBack() : setStep(s => s - 1)}>
+          ← Tilbage
+        </button>
+        <button
+          className="btn-primary"
+          style={{ flex: 2, opacity: canNext ? 1 : 0.4 }}
+          disabled={!canNext}
+          onClick={() => step < content.questions.length - 1 ? setStep(s => s + 1) : onComplete(answers)}
+        >
+          {step === content.questions.length - 1 ? "Se resultater" : "Næste →"}
+        </button>
+      </div>
+    </div>
+  );
 }
