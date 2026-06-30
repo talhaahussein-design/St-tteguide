@@ -35,9 +35,20 @@ export default function Stories() {
     return (
       <PageLayout title={story.title} subtitle={`Trin ${step + 1} af ${story.steps.length}`}>
         <div className="card story-step-card">
-          <div className="story-step-emoji">{cur.emoji}</div>
-          <p className="story-step-text">{cur.text}</p>
-        </div>
+  {cur.image && (
+    <img
+      src={cur.image}
+      alt=""
+      style={{
+        width: "100%",
+        borderRadius: "16px",
+        marginBottom: "1rem"
+      }}
+    />
+  )}
+  <div className="story-step-emoji">{cur.emoji}</div>
+  <p className="story-step-text">{cur.text}</p>
+</div>
         <div className="dot-row">
           {story.steps.map((_, i) => (
             <div key={i} className={`dot${i === step ? " active" : ""}`}
