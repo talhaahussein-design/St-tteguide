@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export function KidsUniverse({ content, onBack }) {
   const [cat, setCat] = useState(null);
