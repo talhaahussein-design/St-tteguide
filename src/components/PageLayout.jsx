@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import BottomNav from "./BottomNav";
 import { motion } from "framer-motion";
+import BottomNav from "./BottomNav";
 
 export default function PageLayout({ title, subtitle, children, action }) {
   return (
@@ -24,11 +24,11 @@ export default function PageLayout({ title, subtitle, children, action }) {
 
       {/* Page Content */}
       <motion.main
-  initial={{ opacity: 0, y: 12 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.3 }}
-  className="flex-1 w-full max-w-4xl mx-auto px-4 py-8"
->
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex-1 w-full max-w-4xl mx-auto px-4 py-8"
+      >
         
         {/* Page Header */}
         <div className="flex items-start gap-4 mb-8">
@@ -58,6 +58,7 @@ export default function PageLayout({ title, subtitle, children, action }) {
         </div>
 
       </motion.main>
+
       {/* Bottom Navigation */}
       <BottomNav />
     </div>
