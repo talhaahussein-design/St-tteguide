@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import BottomNav from "./BottomNav";
+import { motion } from "framer-motion";
 
 export default function PageLayout({ title, subtitle, children, action }) {
   return (
