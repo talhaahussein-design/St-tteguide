@@ -2,6 +2,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import Paragraph42 from "./laws/Paragraph42";
 import LossOfEarningsCalculator from "./calculators/LossOfEarningsCalculator";
 import AppealGuide from "./laws/AppealGuide";
+import ParentLayout from "./ParentLayout";
 
 function ParentHome() {
   return (
