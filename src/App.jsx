@@ -35,16 +35,22 @@ export default function App() {
     <BrowserRouter basename="/St-tteguide">
       {!user ? (
         <RoleSelection />
-      ) : user.role === "parent" ? (
-        <ParentDashboard />
       ) : (
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/feelings" element={<Feelings />} />
-          <Route path="/bodymap" element={<BodyMap />} />
-          <Route path="/communication" element={<Communication />} />
-          <Route path="/stories" element={<Stories />} />
-          <Route path="/profile" element={<Profile />} />
+          {user.role === "parent" && (
+            <Route path="/*" element={<ParentDashboard />} />
+          )}
+
+          {user.role !== "parent" && (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/feelings" element={<Feelings />} />
+              <Route path="/bodymap" element={<BodyMap />} />
+              <Route path="/communication" element={<Communication />} />
+              <Route path="/stories" element={<Stories />} />
+              <Route path="/profile" element={<Profile />} />
+            </>
+          )}
         </Routes>
       )}
     </BrowserRouter>
