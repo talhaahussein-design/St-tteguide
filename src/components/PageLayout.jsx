@@ -3,24 +3,54 @@ import BottomNav from "./BottomNav";
 
 export default function PageLayout({ title, subtitle, children, action }) {
   return (
-    <div className="page-shell">
-      <header className="topbar">
-        <div className="topbar-logo">
-          <div className="topbar-logo-icon">🌿</div>
-          StøtteGuide
+    <div className="min-h-screen bg-slate-50 flex flex-col">
+
+      {/* Top Bar */}
+      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          
+          <div className="flex items-center gap-3 text-slate-800 font-semibold text-lg">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-white">
+              🌿
+            </div>
+            StøtteGuide
+          </div>
+
+          {action && <div>{action}</div>}
         </div>
-        {action && <div className="topbar-right">{action}</div>}
       </header>
-      <div className="page-content">
-        <div className="page-header">
-          <Link to="/" className="back-btn">←</Link>
+
+      {/* Content */}
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
+        
+        <div className="flex items-start gap-4 mb-8">
+          <Link
+            to="/"
+            className="text-slate-500 hover:text-slate-800 transition text-xl"
+          >
+            ←
+          </Link>
+
           <div>
-            <h1>{title}</h1>
-            {subtitle && <p className="page-subtitle">{subtitle}</p>}
+            <h1 className="text-3xl font-bold text-slate-900">
+              {title}
+            </h1>
+
+            {subtitle && (
+              <p className="text-slate-500 mt-1">
+                {subtitle}
+              </p>
+            )}
           </div>
         </div>
-        {children}
-      </div>
+
+        <div className="space-y-6">
+          {children}
+        </div>
+
+      </main>
+
+      {/* Bottom Navigation */}
       <BottomNav />
     </div>
   );
