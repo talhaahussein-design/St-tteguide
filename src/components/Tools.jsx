@@ -1,68 +1,119 @@
-import { useState } from 'react';
+import { useState } from "react";
+import Card from "../components/Card";
+import Button from "../components/Button";
 
 export function Tools({ content, municipality }) {
-  const [tab, setTab] = useState('municipality');
-  const copy = text => { navigator.clipboard.writeText(text); alert('Kopieret!'); };
+  const [tab, setTab] = useState("municipality");
+
+  const copy = (text) => {
+    navigator.clipboard.writeText(text);
+  };
 
   return (
-    <div>
-      <div className="tabs">
-        <button className={`tab-btn${tab === 'municipality' ? " active" : ""}`} onClick={() => setTab('municipality')}>Find kommune</button>
-        <button className={`tab-btn${tab === 'templates' ? " active" : ""}`} onClick={() => setTab('templates')}>Skabeloner</button>
+    <div className="space-y-6">
+
+      {/* Tabs */}
+      <div className="flex gap-3">
+        <Button
+          variant={tab === "municipality" ? "primary" : "secondary"}
+          onClick={() => setTab("municipality")}
+        >
+          Find kommune
+        </Button>
+
+        <Button
+          variant={tab === "templates" ? "primary" : "secondary"}
+          onClick={() => setTab("templates")}
+        >
+          Skabeloner
+        </Button>
       </div>
 
-      {tab === 'municipality' ? (
+      {tab === "municipality" ? (
         <>
-          <div className="card" style={{ marginBottom: 12 }}>
-            <h2 style={{ fontSize: 17, fontWeight: 800, color: "var(--slate-900)", marginBottom: 5 }}>{municipality.title}</h2>
-            <p style={{ fontSize: 13, color: "var(--slate-500)", lineHeight: 1.6, marginBottom: 16 }}>{municipality.description}</p>
-            {municipality.steps.map((s, i) => (
-              <div key={i} style={{ display: "flex", gap: 12, marginBottom: 14 }}>
-                <div style={{ width: 26, height: 26, borderRadius: "50%", background: "var(--blue-soft)", border: "1.5px solid var(--blue-mid)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 12, fontWeight: 800, color: "var(--blue)" }}>{i+1}</div>
-                <div>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: "var(--slate-800)" }}>{s.title}</p>
-                  <p style={{ fontSize: 13, color: "var(--slate-500)", marginTop: 2, lineHeight: 1.5 }}>{s.text}</p>
+          <Card>
+            <h2 className="text-xl font-bold mb-2">
+              {municipality.title}
+            </h2>
+            <p className="text-slate-600 mb-6">
+              {municipality.description}
+            </p>
+
+            <div className="space-y-5">
+              {municipality.steps.map((s, i) => (
+                <div key={i} className="flex gap-4">
+                  <div className="w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full font-semibold text-sm">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-800">
+                      {s.title}
+                    </p>
+                    <p className="text-slate-600 text-sm mt-1">
+                      {s.text}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="card" style={{ background: "var(--slate-800)", border: "none" }}>
-            <p style={{ fontWeight: 800, color: "white", marginBottom: 12 }}>{municipality.adviceTitle}</p>
-            {municipality.advice.map((a, i) => (
-              <p key={i} style={{ fontSize: 13, color: "rgba(255,255,255,.75)", lineHeight: 1.6, marginBottom: 8 }}>
-                <span style={{ color: "#5eead4", fontWeight: 700 }}>• </span>{a}
-              </p>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="bg-slate-900 text-white">
+            <p className="font-bold mb-3">
+              {municipality.adviceTitle}
+            </p>
+            <div className="space-y-2 text-sm text-slate-300">
+              {municipality.advice.map((a, i) => (
+                <p key={i}>• {a}</p>
+              ))}
+            </div>
+          </Card>
         </>
       ) : (
         <>
-          <div className="card" style={{ marginBottom: 12 }}>
-            <h2 style={{ fontSize: 17, fontWeight: 800, color: "var(--slate-900)", marginBottom: 5 }}>{content.title}</h2>
-            <p style={{ fontSize: 13, color: "var(--slate-500)", lineHeight: 1.6 }}>{content.description}</p>
-          </div>
+          <Card>
+            <h2 className="text-xl font-bold mb-2">
+              {content.title}
+            </h2>
+            <p className="text-slate-600">
+              {content.description}
+            </p>
+          </Card>
+
           {content.items.map((item, i) => (
-            <div key={i} className="template-card">
-              <p style={{ fontWeight: 800, color: "var(--slate-800)", marginBottom: 10 }}>{item.title}</p>
+            <Card key={i}>
+              <p className="font-bold text-slate-800 mb-3">
+                {item.title}
+              </p>
+
               {item.subject && (
-                <div className="template-subject-box">
-                  <p className="template-subject-label">Emne</p>
-                  <p className="template-subject-value">{item.subject}</p>
+                <div className="bg-slate-100 rounded-lg p-3 mb-4">
+                  <p className="text-xs font-semibold text-slate-500">
+                    Emne
+                  </p>
+                  <p className="text-slate-800">
+                    {item.subject}
+                  </p>
                 </div>
               )}
-              <pre className="template-body">{item.body}</pre>
-              <button className="btn-primary" style={{ fontSize: 14 }}
-                onClick={() => copy(item.subject ? `Emne: ${item.subject}\n\n${item.body}` : item.body)}>
+
+              <pre className="whitespace-pre-wrap text-sm text-slate-700 bg-slate-50 p-4 rounded-lg mb-4">
+                {item.body}
+              </pre>
+
+              <Button
+                onClick={() =>
+                  copy(
+                    item.subject
+                      ? `Emne: ${item.subject}\n\n${item.body}`
+                      : item.body
+                  )
+                }
+              >
                 Kopiér skabelon
-              </button>
-            </div>
+              </Button>
+            </Card>
           ))}
-          <div className="card" style={{ background: "var(--blue-soft)", border: "1.5px solid var(--blue-mid)" }}>
-            <p style={{ fontWeight: 800, color: "#1e40af", marginBottom: 8 }}>{content.rulesTitle}</p>
-            {content.rules.map((r, i) => (
-              <p key={i} style={{ fontSize: 13, color: "var(--blue)", lineHeight: 1.6, marginBottom: 5 }}>• {r}</p>
-            ))}
-          </div>
         </>
       )}
     </div>
