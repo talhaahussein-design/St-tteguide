@@ -1,25 +1,38 @@
+import Card from "../components/Card";
+import Button from "../components/Button";
+
 export function Welcome({ content, onSelectRole }) {
   return (
-    <div>
-      <div className="card" style={{ marginBottom: 16 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 900, color: "#1d4ed8", marginBottom: 8, letterSpacing: "-0.3px" }}>
+    <div className="space-y-6">
+
+      <Card>
+        <h2 className="text-2xl font-bold text-slate-900 mb-2">
           {content.title}
         </h2>
-        <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
+        <p className="text-slate-600">
           {content.description}
         </p>
+      </Card>
+
+      <div className="space-y-4">
+        {content.roles.map((role) => (
+          <Button
+            key={role.id}
+            full
+            onClick={() => onSelectRole(role.id)}
+          >
+            <div className="text-left">
+              <div className="font-semibold">
+                {role.title}
+              </div>
+              <div className="text-sm opacity-80">
+                {role.description}
+              </div>
+            </div>
+          </Button>
+        ))}
       </div>
 
-      <p className="section-label">{content.rolesTitle}</p>
-      {content.roles.map(role => (
-        <button key={role.id} className="role-btn" onClick={() => onSelectRole(role.id)}>
-          <div className="role-btn-title">{role.title}</div>
-          <div className="role-btn-desc">{role.description}</div>
-        </button>
-      ))}
-      <p style={{ fontSize: 12, color: "var(--slate-400)", textAlign: "center", marginTop: 16, lineHeight: 1.6 }}>
-        {content.footer}
-      </p>
     </div>
   );
 }
