@@ -23,7 +23,12 @@ export default function PageLayout({ title, subtitle, children, action }) {
       </header>
 
       {/* Page Content */}
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-8">
+      <motion.main
+  initial={{ opacity: 0, y: 12 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.3 }}
+  className="flex-1 w-full max-w-4xl mx-auto px-4 py-8"
+>
         
         {/* Page Header */}
         <div className="flex items-start gap-4 mb-8">
@@ -52,8 +57,7 @@ export default function PageLayout({ title, subtitle, children, action }) {
           {children}
         </div>
 
-      </main>
-
+      </motion.main>
       {/* Bottom Navigation */}
       <BottomNav />
     </div>
