@@ -1,31 +1,49 @@
-import { useState } from 'react';
+import { useState } from "react";
+import Card from "../components/Card";
 
 export function Checklist({ content }) {
   const [checked, setChecked] = useState({});
-  const toggle = i => setChecked(c => ({ ...c, [i]: !c[i] }));
+
+  const toggle = (i) =>
+    setChecked((c) => ({ ...c, [i]: !c[i] }));
 
   return (
-    <div>
-      <div className="card" style={{ marginBottom: 16 }}>
-        <h2 style={{ fontSize: 18, fontWeight: 800, color: "var(--slate-900)", marginBottom: 6 }}>{content.title}</h2>
-        <p style={{ fontSize: 14, color: "var(--slate-500)", lineHeight: 1.6 }}>{content.description}</p>
-      </div>
+    <div className="space-y-6">
+      <Card>
+        <h2 className="text-xl font-bold mb-2">
+          {content.title}
+        </h2>
+        <p className="text-slate-600">
+          {content.description}
+        </p>
+      </Card>
 
-      <div className="card" style={{ padding: 0, overflow: "hidden" }}>
+      <Card className="p-0">
         {content.items.map((item, i) => (
-          <div key={i} className="checklist-item" onClick={() => toggle(i)}
-            style={{ opacity: checked[i] ? 0.5 : 1 }}>
-            <div className={`checklist-check${checked[i] ? " checked" : ""}`}>
-              {checked[i] && <span style={{ color: "white", fontSize: 14 }}>✓</span>}
+          <div
+            key={i}
+            onClick={() => toggle(i)}
+            className="flex items-center gap-4 px-6 py-4 border-b last:border-none cursor-pointer hover:bg-slate-50 transition"
+          >
+            <div
+              className={`w-6 h-6 rounded-md border flex items-center justify-center ${
+                checked[i]
+                  ? "bg-blue-500 border-blue-500 text-white"
+                  : "border-slate-300"
+              }`}
+            >
+              {checked[i] && "✓"}
             </div>
-            <span style={{ fontSize: 14, fontWeight: 600, color: "var(--slate-700)",
-              textDecoration: checked[i] ? "line-through" : "none" }}>{item}</span>
+            <span
+              className={`text-slate-700 ${
+                checked[i] ? "line-through opacity-60" : ""
+              }`}
+            >
+              {item}
+            </span>
           </div>
         ))}
-      </div>
-      <p style={{ fontSize: 12, color: "var(--slate-400)", textAlign: "center", marginTop: 14, lineHeight: 1.6 }}>
-        {content.footer}
-      </p>
+      </Card>
     </div>
   );
 }
