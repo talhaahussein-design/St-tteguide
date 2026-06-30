@@ -551,3 +551,31 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+.parent-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.parent-wrapper h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.parent-wrapper h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.parent-wrapper ul {
+  line-height: 1.8;
+}
+
+.parent-wrapper a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.parent-wrapper a:hover {
+  text-decoration: underline;
+}
