@@ -1,6 +1,7 @@
 import { Link, Routes, Route } from "react-router-dom";
 import Paragraph42 from "./laws/Paragraph42";
 import LossOfEarningsCalculator from "./calculators/LossOfEarningsCalculator";
+import AppealGuide from "./laws/AppealGuide";
 
 function ParentHome() {
   return (
@@ -12,38 +13,29 @@ function ParentHome() {
         økonomisk støtte og hvad I konkret kan gøre næste skridt.
       </p>
 
-      <div style={{ marginBottom: "2rem" }}>
-        <h2>💰 Økonomisk støtte</h2>
-
-        <ul style={{ lineHeight: "1.8" }}>
-          <li>
-            <Link to="42">
-              §42 – Tabt arbejdsfortjeneste
-            </Link>
-          </li>
-          <li>
-            <Link to="calculator">
-              Beregn vejledende tabt arbejdsfortjeneste
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <div style={{ marginBottom: "2rem" }}>
-        <h2>📘 Hvad gør jeg hvis kommunen siger nej?</h2>
-        <p>
-          Du har ret til en skriftlig afgørelse og mulighed for at klage.
-          Vi arbejder på at samle konkrete formuleringer og vejledning her.
-        </p>
-      </div>
-
-      <div>
-        <h2>⚖️ Vigtigt</h2>
-        <p style={{ fontSize: "0.9rem", opacity: 0.8 }}>
-          Informationen her er vejledende og ikke juridisk rådgivning.
-          Tjek altid gældende lovgivning.
-        </p>
-      </div>
+      <h2>💰 Økonomisk støtte</h2>
+      <ul style={{ lineHeight: "1.8" }}>
+        <li>
+          <Link to="42">§42 – Tabt arbejdsfortjeneste</Link>
+        </li>
+        <li>
+          <Link to="calculator">Beregn tabt arbejdsfortjeneste</Link>
+        </li>
+        <li>
+          <Link to="appeal">Klagevejledning</Link>
+        </li>
+      </ul>
     </div>
+  );
+}
+
+export default function ParentDashboard() {
+  return (
+    <Routes>
+      <Route path="/" element={<ParentHome />} />
+      <Route path="42" element={<Paragraph42 />} />
+      <Route path="calculator" element={<LossOfEarningsCalculator />} />
+      <Route path="appeal" element={<AppealGuide />} />
+    </Routes>
   );
 }
