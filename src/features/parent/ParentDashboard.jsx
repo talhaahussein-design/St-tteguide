@@ -32,11 +32,13 @@ function ParentHome() {
 
 export default function ParentDashboard() {
   return (
-    <Routes>
-      <Route path="/" element={<ParentHome />} />
-      <Route path="42" element={<Paragraph42 />} />
-      <Route path="calculator" element={<LossOfEarningsCalculator />} />
-      <Route path="appeal" element={<AppealGuide />} />
-    </Routes>
+    <ParentLayout>
+      <Routes>
+        <Route path="/" element={<ParentHome />} />
+        <Route path="42" element={<Paragraph42 />} />
+        <Route path="calculator" element={<LossOfEarningsCalculator />} />
+        <Route path="appeal" element={<AppealGuide />} />
+      </Routes>
+    </ParentLayout>
   );
 }
